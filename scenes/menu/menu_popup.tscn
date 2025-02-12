@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckg2ba8e3xqo5"]
+
+[ext_resource type="FontFile" uid="uid://bm22e4yafek3d" path="res://assets/fonts/Minecraft.ttf" id="1_8helh"]
+[ext_resource type="Script" path="res://scenes/scripts/menu_scripts/menu_popup.gd" id="1_t8ib2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7iw3"]
+bg_color = Color(0, 0, 0, 0.333333)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cxmy4"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b2qys"]
+
+[node name="MenuPopup" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_t8ib2")
+
+[node name="overlay" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_y7iw3")
+
+[node name="PauseMenuContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenuContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cxmy4")
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenuContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="rows" type="VBoxContainer" parent="PauseMenuContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="PauseTitle" type="Label" parent="PauseMenuContainer/PanelContainer/MarginContainer/rows"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("1_8helh")
+theme_override_font_sizes/font_size = 60
+text = "PAUSED"
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PauseMenuContainer/PanelContainer/MarginContainer/rows"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_b2qys")
+
+[node name="Continue" type="Button" parent="PauseMenuContainer/PanelContainer/MarginContainer/rows"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8helh")
+theme_override_font_sizes/font_size = 35
+text = "Continue"
+
+[node name="MainMenu" type="Button" parent="PauseMenuContainer/PanelContainer/MarginContainer/rows"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8helh")
+theme_override_font_sizes/font_size = 35
+text = "Main Menu"
+
+[node name="Quit" type="Button" parent="PauseMenuContainer/PanelContainer/MarginContainer/rows"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8helh")
+theme_override_font_sizes/font_size = 35
+text = "Quit"
+
+[connection signal="pressed" from="PauseMenuContainer/PanelContainer/MarginContainer/rows/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="PauseMenuContainer/PanelContainer/MarginContainer/rows/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="PauseMenuContainer/PanelContainer/MarginContainer/rows/Quit" to="." method="_on_quit_pressed"]

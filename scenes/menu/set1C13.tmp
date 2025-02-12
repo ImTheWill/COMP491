@@ -1,0 +1,291 @@
+[gd_scene load_steps=9 format=3 uid="uid://b6wio0jdy4h7t"]
+
+[ext_resource type="Texture2D" uid="uid://m4p5ijggeqg0" path="res://assets/Rusted Music Studio - Assets/Rusted (24).png" id="1_0e5l6"]
+[ext_resource type="Script" path="res://scripts/menu_scripts/settings_menu.gd" id="1_1ri5y"]
+[ext_resource type="FontFile" uid="uid://bm22e4yafek3d" path="res://assets/fonts/Minecraft.ttf" id="3_xo42u"]
+[ext_resource type="Script" path="res://scenes/menu/window_mode_butt.gd" id="4_btk12"]
+[ext_resource type="Script" path="res://scenes/menu/resolution.gd" id="5_mkpgn"]
+[ext_resource type="Script" path="res://scenes/menu/rebind_controls.gd" id="6_h7llu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_juudm"]
+texture = ExtResource("1_0e5l6")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b4jkm"]
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1ri5y")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 644.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_juudm")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -404.0
+offset_top = -244.5
+offset_right = 404.0
+offset_bottom = 244.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_xo42u")
+current_tab = 2
+
+[node name="Camera" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xo42u")
+metadata/_tab_index = 0
+
+[node name="Graphics" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xo42u")
+metadata/_tab_index = 1
+
+[node name="window_mode_butt" type="Control" parent="TabContainer/Graphics"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_btk12")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Graphics/window_mode_butt"]
+layout_mode = 0
+offset_top = 21.5
+offset_right = 809.0
+offset_bottom = 69.5
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/Graphics/window_mode_butt/HBoxContainer"]
+custom_minimum_size = Vector2(264, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Window Mode"
+
+[node name="VSeparator" type="VSeparator" parent="TabContainer/Graphics/window_mode_butt/HBoxContainer"]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="TabContainer/Graphics/window_mode_butt/HBoxContainer"]
+custom_minimum_size = Vector2(256, 48)
+layout_mode = 2
+
+[node name="resolution" type="Control" parent="TabContainer/Graphics"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_mkpgn")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Graphics/resolution"]
+offset_top = 122.5
+offset_right = 809.0
+offset_bottom = 170.5
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/Graphics/resolution/HBoxContainer2"]
+custom_minimum_size = Vector2(264, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Resolution"
+
+[node name="VSeparator" type="VSeparator" parent="TabContainer/Graphics/resolution/HBoxContainer2"]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="TabContainer/Graphics/resolution/HBoxContainer2"]
+custom_minimum_size = Vector2(256, 48)
+layout_mode = 2
+
+[node name="Controls" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xo42u")
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Controls"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 39.0
+offset_right = 749.0
+offset_bottom = 456.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Controls/MarginContainer"]
+clip_contents = false
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 40
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxEmpty_b4jkm")
+
+[node name="rebind_controls" type="Control" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("6_h7llu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer/rebind_controls"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -15.0
+offset_right = 650.0
+offset_bottom = 26.0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer/rebind_controls/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 18
+text = "Action/control"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer/rebind_controls/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 100
+
+[node name="Button" type="Button" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer/rebind_controls/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "keybind"
+
+[node name="rebind_controls2" type="Control" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("6_h7llu")
+action_name = "move_right"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer/rebind_controls2"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -15.0
+offset_right = 650.0
+offset_bottom = 26.0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer/rebind_controls2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 18
+text = "Action/control"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer/rebind_controls2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 100
+
+[node name="Button" type="Button" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer/rebind_controls2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "keybind"
+
+[node name="rebind_controls3" type="Control" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("6_h7llu")
+action_name = "jump"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer/rebind_controls3"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -15.0
+offset_right = 650.0
+offset_bottom = 26.0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer/rebind_controls3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 18
+text = "Action/control"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer/rebind_controls3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 100
+
+[node name="Button" type="Button" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer/rebind_controls3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "keybind"
+
+[node name="rebind_controls4" type="Control" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("6_h7llu")
+action_name = "left_click"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer/rebind_controls4"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -15.0
+offset_right = 650.0
+offset_bottom = 26.0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer/rebind_controls4/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 18
+text = "Action/control"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer/rebind_controls4/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 100
+
+[node name="Button" type="Button" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer/rebind_controls4/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "keybind"
+
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxEmpty_b4jkm")
+
+[node name="Sound" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xo42u")
+metadata/_tab_index = 3
+
+[node name="Accessibility" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xo42u")
+metadata/_tab_index = 4

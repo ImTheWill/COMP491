@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvkknqylfrl5j"]
+
+[ext_resource type="FontFile" uid="uid://bm22e4yafek3d" path="res://assets/fonts/Minecraft.ttf" id="1_2m8qx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hsirr"]
+bg_color = Color(0, 0, 0, 0.392157)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yg1d1"]
+bg_color = Color(1, 1, 1, 0.392157)
+
+[node name="InputButton" type="Button"]
+custom_minimum_size = Vector2(0, 40)
+focus_mode = 0
+theme_override_styles/focus = SubResource("StyleBoxFlat_hsirr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yg1d1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yg1d1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 84.0
+offset_right = 568.0
+offset_bottom = 40.0
+
+[node name="LabelAction" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("1_2m8qx")
+theme_override_font_sizes/font_size = 25
+text = "ACTION NAME"
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelInput" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("1_2m8qx")
+theme_override_font_sizes/font_size = 25
+text = "INPUT KEY
+"
+vertical_alignment = 1

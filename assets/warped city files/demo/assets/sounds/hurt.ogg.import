@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dlbeid8xu64wp"
+path="res://.godot/imported/hurt.ogg-8e4f182baabbb9567129b44070466591.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/warped city files/demo/assets/sounds/hurt.ogg"
+dest_files=["res://.godot/imported/hurt.ogg-8e4f182baabbb9567129b44070466591.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

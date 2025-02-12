@@ -1,0 +1,292 @@
+[gd_scene load_steps=10 format=3 uid="uid://b6wio0jdy4h7t"]
+
+[ext_resource type="Texture2D" uid="uid://m4p5ijggeqg0" path="res://assets/Rusted Music Studio - Assets/Rusted (24).png" id="1_0e5l6"]
+[ext_resource type="Script" path="res://scripts/menu_scripts/settings_menu.gd" id="1_1ri5y"]
+[ext_resource type="FontFile" uid="uid://bm22e4yafek3d" path="res://assets/fonts/Minecraft.ttf" id="3_xo42u"]
+[ext_resource type="Script" path="res://scripts/menu_scripts/window_mode_butt.gd" id="4_btk12"]
+[ext_resource type="Script" path="res://scripts/menu_scripts/resolution.gd" id="5_mkpgn"]
+[ext_resource type="Script" path="res://scripts/menu_scripts/InputSettings.gd" id="6_ij5qd"]
+[ext_resource type="PackedScene" uid="uid://7dgs8a6inte7" path="res://scenes/input_button.tscn" id="7_y62me"]
+[ext_resource type="Script" path="res://scenes/menu/volume_slider.gd" id="8_y2xfi"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_juudm"]
+texture = ExtResource("1_0e5l6")
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchor_right = 0.986
+anchor_bottom = 0.968
+offset_right = 0.12793
+offset_bottom = -0.264038
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1ri5y")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -5.0
+offset_right = 1284.0
+offset_bottom = 728.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_juudm")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -404.0
+offset_top = -244.5
+offset_right = 404.0
+offset_bottom = 244.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_xo42u")
+current_tab = 2
+
+[node name="Graphics" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xo42u")
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Graphics"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 39.0
+offset_right = 749.0
+offset_bottom = 456.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Graphics/MarginContainer"]
+clip_contents = false
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VSplitContainer" type="VSplitContainer" parent="TabContainer/Graphics/MarginContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="window_mode_butt" type="Control" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VSplitContainer"]
+layout_mode = 2
+script = ExtResource("4_btk12")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VSplitContainer/window_mode_butt"]
+layout_mode = 0
+offset_left = -36.0
+offset_top = 22.0
+offset_right = 727.0
+offset_bottom = 70.0
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VSplitContainer/window_mode_butt/HBoxContainer"]
+custom_minimum_size = Vector2(264, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_xo42u")
+theme_override_font_sizes/font_size = 32
+text = "Window Mode"
+
+[node name="VSeparator" type="VSeparator" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VSplitContainer/window_mode_butt/HBoxContainer"]
+layout_mode = 2
+
+[node name="window_mode" type="OptionButton" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VSplitContainer/window_mode_butt/HBoxContainer"]
+custom_minimum_size = Vector2(256, 48)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xo42u")
+
+[node name="resolution" type="Control" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VSplitContainer"]
+layout_mode = 2
+script = ExtResource("5_mkpgn")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VSplitContainer/resolution"]
+layout_mode = 0
+offset_left = -36.0
+offset_top = 60.0
+offset_right = 727.0
+offset_bottom = 108.0
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VSplitContainer/resolution/HBoxContainer2"]
+custom_minimum_size = Vector2(264, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_xo42u")
+theme_override_font_sizes/font_size = 32
+text = "Resolution"
+
+[node name="VSeparator" type="VSeparator" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VSplitContainer/resolution/HBoxContainer2"]
+layout_mode = 2
+
+[node name="resolution_mode" type="OptionButton" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VSplitContainer/resolution/HBoxContainer2"]
+custom_minimum_size = Vector2(256, 48)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xo42u")
+
+[node name="Controls" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xo42u")
+script = ExtResource("6_ij5qd")
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Controls"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 39.0
+offset_right = 749.0
+offset_bottom = 456.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Controls/MarginContainer"]
+clip_contents = false
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="ActionList" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="InputButton" parent="TabContainer/Controls/MarginContainer/ScrollContainer/ActionList" instance=ExtResource("7_y62me")]
+layout_mode = 2
+
+[node name="InputButton2" parent="TabContainer/Controls/MarginContainer/ScrollContainer/ActionList" instance=ExtResource("7_y62me")]
+layout_mode = 2
+
+[node name="InputButton3" parent="TabContainer/Controls/MarginContainer/ScrollContainer/ActionList" instance=ExtResource("7_y62me")]
+layout_mode = 2
+
+[node name="InputButton4" parent="TabContainer/Controls/MarginContainer/ScrollContainer/ActionList" instance=ExtResource("7_y62me")]
+layout_mode = 2
+
+[node name="Reset" type="Button" parent="TabContainer/Controls/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("3_xo42u")
+text = "Restore To Default"
+
+[node name="Sound" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xo42u")
+metadata/_tab_index = 2
+
+[node name="Master" type="MarginContainer" parent="TabContainer/Sound"]
+layout_mode = 0
+offset_left = 109.896
+offset_top = 50.152
+offset_right = 709.896
+offset_bottom = 90.152
+
+[node name="BoxContainer" type="BoxContainer" parent="TabContainer/Sound/Master"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="TabContainer/Sound/Master/BoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xo42u")
+theme_override_font_sizes/font_size = 25
+text = "Master
+"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="TabContainer/Sound/Master/BoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+split_offset = 10
+
+[node name="master_slider" type="HSlider" parent="TabContainer/Sound/Master/BoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.001
+script = ExtResource("8_y2xfi")
+bus_name = "Master"
+
+[node name="SFX" type="MarginContainer" parent="TabContainer/Sound"]
+layout_mode = 0
+offset_left = 108.896
+offset_top = 96.152
+offset_right = 708.896
+offset_bottom = 136.152
+
+[node name="BoxContainer" type="BoxContainer" parent="TabContainer/Sound/SFX"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="TabContainer/Sound/SFX/BoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xo42u")
+theme_override_font_sizes/font_size = 25
+text = "SFX"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="TabContainer/Sound/SFX/BoxContainer"]
+custom_minimum_size = Vector2(73, 0)
+layout_mode = 2
+split_offset = 10
+
+[node name="sfx_slider" type="HSlider" parent="TabContainer/Sound/SFX/BoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.001
+script = ExtResource("8_y2xfi")
+bus_name = "SFX"
+
+[node name="Music" type="MarginContainer" parent="TabContainer/Sound"]
+layout_mode = 0
+offset_left = 108.896
+offset_top = 138.152
+offset_right = 708.896
+offset_bottom = 193.152
+
+[node name="BoxContainer" type="BoxContainer" parent="TabContainer/Sound/Music"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="TabContainer/Sound/Music/BoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xo42u")
+theme_override_font_sizes/font_size = 25
+text = "Music
+
+"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="TabContainer/Sound/Music/BoxContainer"]
+custom_minimum_size = Vector2(58, 0)
+layout_mode = 2
+split_offset = 10
+
+[node name="music_slider" type="HSlider" parent="TabContainer/Sound/Music/BoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.001
+script = ExtResource("8_y2xfi")
+bus_name = "Music"
+
+[node name="Accessibility" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xo42u")
+metadata/_tab_index = 3
+
+[connection signal="toggled" from="TabContainer/Graphics/MarginContainer/ScrollContainer/VSplitContainer/window_mode_butt/HBoxContainer/window_mode" to="." method="_on_window_mode_toggled"]
+[connection signal="toggled" from="TabContainer/Graphics/MarginContainer/ScrollContainer/VSplitContainer/resolution/HBoxContainer2/resolution_mode" to="." method="_on_resolution_mode_toggled"]
+[connection signal="pressed" from="TabContainer/Controls/MarginContainer/Reset" to="TabContainer/Controls" method="_on_reset_pressed"]
+[connection signal="drag_ended" from="TabContainer/Sound/Master/BoxContainer/master_slider" to="." method="_on_master_slider_drag_ended"]
+[connection signal="drag_ended" from="TabContainer/Sound/SFX/BoxContainer/sfx_slider" to="." method="_on_sfx_slider_drag_ended"]
+[connection signal="drag_ended" from="TabContainer/Sound/Music/BoxContainer/music_slider" to="." method="_on_music_slider_drag_ended"]
