@@ -7,6 +7,8 @@ func _ready():
 	if !FileAccess.file_exists(SETTINGS_FILE_PATH):
 		config.set_value("keybinding", "move_left", "A")
 		config.set_value("keybinding", "move_right", "D")
+		config.set_value("keybinding", "move_up", "W")
+		config.set_value("keybinding", "move_down", "S")
 		config.set_value("keybinding", "jump", "Space")
 		config.set_value("keybinding", "shoot", "mouse_1")
 		

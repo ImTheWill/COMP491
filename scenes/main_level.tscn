@@ -313,7 +313,4 @@ limit_top = 0
 limit_bottom = 880
 
 [node name="robotEnemy" parent="." instance=ExtResource("8_60fa1")]
-position = Vector2(-97, -343)
-
-[node name="robotEnemy2" parent="." instance=ExtResource("8_60fa1")]
-position = Vector2(477, -5)
+position = Vector2(-199, -247)

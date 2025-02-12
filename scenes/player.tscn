@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dvpv2itrthwxn"]
+[gd_scene load_steps=39 format=3 uid="uid://dvpv2itrthwxn"]
 
 [ext_resource type="Texture2D" uid="uid://dq30xdp13brlq" path="res://assets/warped city files/SPRITES/player/shoot/shoot.png" id="1_6rxl6"]
 [ext_resource type="Script" path="res://scenes/scripts/player.gd" id="1_07jxr"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://qkew6mqsndi1" path="res://assets/warped city files/SPRITES/player/jump/jump-2.png" id="7_hd1uk"]
 [ext_resource type="Texture2D" uid="uid://bors0hah5ei6m" path="res://assets/warped city files/SPRITES/player/climb/climb-6.png" id="7_p8qco"]
 [ext_resource type="Texture2D" uid="uid://dslullc1yhq2b" path="res://assets/warped city files/SPRITES/player/jump/jump-3.png" id="8_27422"]
+[ext_resource type="Texture2D" uid="uid://blcf266qkjqsw" path="res://assets/warped city files/SPRITES/player/hurt/hurt.png" id="9_14jpw"]
 [ext_resource type="Texture2D" uid="uid://bj452xsxq6nwd" path="res://assets/warped city files/SPRITES/player/jump/jump-4.png" id="9_ud7l7"]
 [ext_resource type="Texture2D" uid="uid://cwcoj4oaim41y" path="res://assets/warped city files/SPRITES/player/run-shoot/run-shoot-1.png" id="10_0y4en"]
 [ext_resource type="Texture2D" uid="uid://wfhkqbfqj4m7" path="res://assets/warped city files/SPRITES/player/run-shoot/run-shoot-2.png" id="11_2i4sv"]
@@ -74,7 +75,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_6rxl6")
+"texture": ExtResource("9_14jpw")
 }],
 "loop": true,
 "name": &"hurt",
@@ -202,8 +203,8 @@ shape = SubResource("CapsuleShape2D_pl2to")
 
 [node name="playerSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vl02s")
-animation = &"idle"
-frame_progress = 0.153593
+animation = &"crouch"
+frame_progress = 0.135217
 
 [node name="bulletStart" type="Marker2D" parent="."]
 position = Vector2(40, -3)

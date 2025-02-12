@@ -10,6 +10,8 @@ var remapping_button = null
 var input_actions = {
 	"move_left" : "Move Left",
 	"move_right" : "Move Right",
+	"move_down" : "Move Down",
+	"move_up" : "Move Up",
 	"jump" : "Jump",
 	"shoot" : "Shoot"
 }

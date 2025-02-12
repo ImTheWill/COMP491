@@ -1,4 +1,5 @@
 extends CharacterBody2D
+
 @onready var p_cam = $pCam
 @onready var player_sprite = $playerSprite
 @onready var BULLET = load("res://scenes/bullet.tscn")
@@ -6,14 +7,15 @@ extends CharacterBody2D
 @onready var ladder_ray = $ladderRay
 
 #adjustable values
-const max_speed = 250 #max speed
+const max_speed = 200 #max speed
 const accerlation = 1000 #makes charcter move forward
 const jump_accer = -400
 const friction = 900 #makes character slow down smoothly when used with delta *****if you make it greator than velocity for x cord then it sticls the player mid air
-
+var health = 100
 
 
 func _ready():
+	add_to_group("Player")
 	p_cam.make_current()#makes the current camera attached to the player the current active one
 	
 func _physics_process(delta):
@@ -23,6 +25,7 @@ func _physics_process(delta):
 	else:
 		player_movement(delta)
 	move_and_slide()
+	
 
 
 ##need to improve and compress the code using two formarts for input for movement and ladder make into one
@@ -84,7 +87,7 @@ func player_movement(delta):
 	velocity.x = clamp(velocity.x, -max_speed, max_speed)
 	
 func handleAnim(horizontal_mov: int):
-	var is_shooting := Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+	var is_shooting := Input.is_action_pressed("shoot")
 	var isCrouched = Input.is_action_pressed("crouch")
 	
 	if is_on_floor():
@@ -107,3 +110,13 @@ func shoot():
 	nbullet.dir = -1 if player_sprite.flip_h == true else 1 #sets the direction of the bullet
 	nbullet.spawnPos = bullet_start.global_position
 	get_tree().root.add_child(nbullet)
+	
+##need to add impluse to move character away from collision to simulate dmg
+func hit():
+	player_sprite.play("hurt")
+	await get_tree().create_timer(.5).timeout
+	if health <= 0:
+		get_tree().reload_current_scene()
+	else:
+		health -= 10
+	print("dmg taken, health is:", health)
