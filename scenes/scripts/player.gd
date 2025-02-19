@@ -5,122 +5,139 @@ extends CharacterBody2D
 @onready var BULLET = load("res://scenes/bullet.tscn")
 @onready var bullet_start = $bulletStart
 @onready var ladder_ray = $ladderRay
-@onready var health_bar = $HealthBar
 
-#adjustable values
-const max_speed = 200 #max speed
-const accerlation = 1000 #makes charcter move forward
-const jump_accer = -400
-const friction = 900 #makes character slow down smoothly when used with delta *****if you make it greator than velocity for x cord then it sticls the player mid air
-const max_health = 100
+const MAX_SPEED = 200
+const ACCELERATION = 1000
+const JUMP_FORCE = -400
+const FRICTION = 900
+const CLIMB_SPEED = 100
 var health = 100
 
+var platform_velocity = Vector2.ZERO
+var on_moving_platform = false
+var current_platform = null
+var is_climbing = false
 
 func _ready():
 	add_to_group("Player")
-	p_cam.make_current()#makes the current camera attached to the player the current active one
-	
-	
+	p_cam.make_current()
+
 func _physics_process(delta):
-	if global_position.y > 1040 and not is_on_floor():
-		get_tree().reload_current_scene()
-	var ladderCollider = ladder_ray.get_collider()
-	if ladderCollider:
+	var ladder_collider = ladder_ray.get_collider()
+
+	if ladder_collider:
+		is_climbing = true
 		ladder_climb(delta)
 	else:
+		is_climbing = false
 		player_movement(delta)
+		
 	move_and_slide()
-
-##need to improve and compress the code using two formarts for input for movement and ladder make into one
-##reduce redunacy of code 
-func ladder_climb(_delta):
-	var input := Vector2.ZERO
 	
+	# Update platform interaction after move_and_slide
+	if is_on_floor():
+		var collision = get_last_slide_collision()
+		if collision:
+			var collider = collision.get_collider()
+			if collider is AnimatableBody2D:
+				current_platform = collider
+				on_moving_platform = true
+				# Directly sync with platform velocity
+				platform_velocity = current_platform.velocity
+			else:
+				current_platform = null
+				on_moving_platform = false
+				platform_velocity = Vector2.ZERO
+	else:
+		current_platform = null
+		on_moving_platform = false
+		platform_velocity = Vector2.ZERO
+
+	# Apply platform movement
+	if on_moving_platform and current_platform:
+		position += platform_velocity * delta
+
+func ladder_climb(delta):
+	var input := Vector2.ZERO
+
 	player_sprite.play("climb")
 	input.x = Input.get_axis("move_left", "move_right")
 	input.y = Input.get_axis("move_up", "move_down")
-	if input:
-		velocity = input*100
+
+	if input != Vector2.ZERO:
+		velocity = input * CLIMB_SPEED
 	else:
 		velocity = Vector2.ZERO
-		if(ladder_ray.get_collider()):
+		if ladder_ray.get_collider():
 			player_sprite.pause()
-	#allows for jumping from ladder
+
 	if Input.is_action_just_pressed("jump"):
-		velocity.y = jump_accer
+		velocity.y = JUMP_FORCE
+		is_climbing = false
 		ladder_ray.set_collision_mask_value(2, false)
-	 
 
 func player_movement(delta):
-	var horizontal_mov = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+	if is_climbing:
+		return
+
+	var horizontal_move = Input.get_axis("move_left", "move_right")
 	var has_jumped = Input.is_action_just_pressed("jump")
-	
-	#sets ladder raycast to true if abled to
+
 	if is_on_floor() or Input.is_action_pressed("move_up"):
 		ladder_ray.set_collision_mask_value(2, true)
-	#vertical movement
-	if is_on_floor() && has_jumped:
-		velocity.y = jump_accer
+
+	if is_on_floor() and has_jumped:
+		velocity.y = JUMP_FORCE
+		on_moving_platform = false
+		current_platform = null
 	else:
-		velocity.x += horizontal_mov*accerlation*delta/2
-		velocity.y += get_gravity().y*delta
-	#horizontal movement
-	if (horizontal_mov != 0) && is_on_floor():
-		velocity.x += horizontal_mov*accerlation*delta
-		player_sprite.flip_h = false if horizontal_mov == 1 else true
-		
-		#changes bullet_start position bassed on the direction the player is facing
-		if(horizontal_mov == -1):
-			#if statement reduces constant position change and flickering
-			if(bullet_start.position.x > 0):
-				bullet_start.rotation_degrees = 180
-				bullet_start.position.x = bullet_start.position.x*-1
-		elif (horizontal_mov == 1):
-			#if statement reduces constant position change and flickering
-			if(bullet_start.position.x < 0):
-				bullet_start.rotation_degrees = 0
-				bullet_start.position.x = absf(bullet_start.position.x)
-		else: pass
-	else: 
-		if is_on_floor(): # allows for retaining velocity while jumping
-			if velocity.length() >(friction*delta):
-				velocity.x -= velocity.normalized().x*(friction * delta)
-			else: velocity = Vector2.ZERO
-	handleAnim(horizontal_mov) # reset of animations
-	velocity.x = clamp(velocity.x, -max_speed, max_speed)
-	
-func handleAnim(horizontal_mov: int):
+		velocity.x += horizontal_move * ACCELERATION * delta / 2
+		velocity.y += get_gravity().y * delta
+
+	if horizontal_move != 0 and is_on_floor():
+		velocity.x += horizontal_move * ACCELERATION * delta
+		player_sprite.flip_h = horizontal_move < 0
+	else:
+		if is_on_floor():
+			if velocity.length() > (FRICTION * delta) and not on_moving_platform:
+				velocity.x -= velocity.normalized().x * (FRICTION * delta)
+			else:
+				velocity.x = 0
+
+	handle_animation(horizontal_move)
+	velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
+
+func handle_animation(horizontal_move: float):
 	var is_shooting := Input.is_action_pressed("shoot")
-	var isCrouched = Input.is_action_pressed("crouch")
-	
+	var is_crouched = Input.is_action_pressed("crouch")
+
+	if is_climbing:
+		player_sprite.play("climb")
+		return
+
 	if is_on_floor():
-		if horizontal_mov == 0:
-			player_sprite.play("shoot" if is_shooting else "idle" if !isCrouched else "crouch")
+		if horizontal_move == 0:
+			player_sprite.play("shoot" if is_shooting else "idle" if !is_crouched else "crouch")
 			if is_shooting and Input.is_action_just_pressed("shoot"):
 				shoot()
-				pass
 		else:
 			player_sprite.play("run_shoot" if is_shooting else "run")
 			if is_shooting and Input.is_action_just_pressed("shoot"):
 				shoot()
-				pass
 	else:
 		player_sprite.play("jump")
-		
-		
+
 func shoot():
-	var nbullet = BULLET.instantiate()
-	nbullet.dir = -1 if player_sprite.flip_h == true else 1 #sets the direction of the bullet
-	nbullet.spawnPos = bullet_start.global_position
-	get_tree().root.add_child(nbullet)
-	
-##need to add animation hurt
-func hit(direction: int):
-	velocity.x += 300 * direction
-	move_and_slide()
+	var new_bullet = BULLET.instantiate()
+	new_bullet.dir = -1 if player_sprite.flip_h else 1
+	new_bullet.spawn_pos = bullet_start.global_position
+	get_tree().root.add_child(new_bullet)
+
+func hit():
+	player_sprite.play("hurt")
+	await get_tree().create_timer(0.5).timeout
 	if health <= 0:
 		get_tree().reload_current_scene()
 	else:
 		health -= 10
-		health_bar.change_health(-10)
-		print("dmg taken, health is:", health)
+	print("Damage taken, health is:", health)
