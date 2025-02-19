@@ -15,9 +15,9 @@ func _physics_process(_delta):
 	pass
 
 func _on_body_entered(body):
-	if body is TileMapLayer:
+	if body is TileMapLayer || body is RigidBody2D:
 		queue_free()
 	else:
-		body.health -=10;
+		body.hit()
 		print(body.health)
 		queue_free()

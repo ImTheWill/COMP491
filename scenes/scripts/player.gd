@@ -5,12 +5,14 @@ extends CharacterBody2D
 @onready var BULLET = load("res://scenes/bullet.tscn")
 @onready var bullet_start = $bulletStart
 @onready var ladder_ray = $ladderRay
+@onready var health_bar = $HealthBar
 
 #adjustable values
 const max_speed = 200 #max speed
 const accerlation = 1000 #makes charcter move forward
 const jump_accer = -400
 const friction = 900 #makes character slow down smoothly when used with delta *****if you make it greator than velocity for x cord then it sticls the player mid air
+const max_health = 100
 var health = 100
 
 
@@ -18,15 +20,16 @@ func _ready():
 	add_to_group("Player")
 	p_cam.make_current()#makes the current camera attached to the player the current active one
 	
+	
 func _physics_process(delta):
+	if global_position.y > 1040 and not is_on_floor():
+		get_tree().reload_current_scene()
 	var ladderCollider = ladder_ray.get_collider()
 	if ladderCollider:
 		ladder_climb(delta)
 	else:
 		player_movement(delta)
 	move_and_slide()
-	
-
 
 ##need to improve and compress the code using two formarts for input for movement and ladder make into one
 ##reduce redunacy of code 
@@ -111,12 +114,13 @@ func shoot():
 	nbullet.spawnPos = bullet_start.global_position
 	get_tree().root.add_child(nbullet)
 	
-##need to add impluse to move character away from collision to simulate dmg
-func hit():
-	player_sprite.play("hurt")
-	await get_tree().create_timer(.5).timeout
+##need to add animation hurt
+func hit(direction: int):
+	velocity.x += 300 * direction
+	move_and_slide()
 	if health <= 0:
 		get_tree().reload_current_scene()
 	else:
 		health -= 10
-	print("dmg taken, health is:", health)
+		health_bar.change_health(-10)
+		print("dmg taken, health is:", health)

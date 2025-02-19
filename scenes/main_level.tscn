@@ -303,10 +303,9 @@ tile_map_data = PackedByteArray("AADn/wIAAAAHAAsAAADo/wIAAAAHAAsAAADp/wIAAAAHAAs
 tile_set = SubResource("TileSet_cefyh")
 
 [node name="Player" parent="." instance=ExtResource("2_li2ec")]
-position = Vector2(-382, -5)
+position = Vector2(-381, -243)
 
 [node name="pCam" type="Camera2D" parent="Player"]
-visible = false
 zoom = Vector2(1.5, 1.5)
 limit_left = 0
 limit_top = 0

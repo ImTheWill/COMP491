@@ -1,6 +1,7 @@
 extends CharacterBody2D
 @onready var robot_ray = $robotRay
 @onready var robot_anim_sprite = $robotAnimSprite
+@onready var enemy_health_bar = $EnemyHealthBar
 
 #adjustable values
 var speed = 60
@@ -10,6 +11,7 @@ var health = 100
 
 func _ready():
 	robot_anim_sprite.play("patrolWalk")
+	add_to_group("Enemy")
 func _physics_process(delta):
 	if(health<=0):
 		robot_anim_sprite.play("death")
@@ -25,12 +27,16 @@ func _physics_process(delta):
 	for i in get_slide_collision_count():
 		var bodyCollided = get_slide_collision(i).get_collider()
 		if bodyCollided.is_in_group("Player"):
-			bodyCollided.hit()
+			bodyCollided.hit(-1 if facing_right else 1)
 
 func flip():
+	robot_ray.position.x = abs(robot_ray.position.x) if facing_right else abs(robot_ray.position.x)*-1
 	facing_right = !facing_right
-	scale.x = abs(scale.x) * -1
+	robot_anim_sprite.flip_h = facing_right
 	if facing_right:
 		speed = abs(speed)*-1
 	else:
 		speed = abs(speed)
+func hit():
+		health -= 10
+		enemy_health_bar.change_health(-10)

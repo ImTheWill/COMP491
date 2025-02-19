@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dgay74lfvj03a"]
+[gd_scene load_steps=18 format=3 uid="uid://dgay74lfvj03a"]
 
 [ext_resource type="Texture2D" uid="uid://df0qpnvfn3l5k" path="res://assets/warped city files/Warped-city-addon-files/Spritesheets/bootleg-walk.png" id="1_7ebll"]
 [ext_resource type="Script" path="res://scenes/scripts/robot_enemy.gd" id="1_pi8ix"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://j7uw2deqi81v" path="res://assets/warped city files/SPRITES/misc/enemy-explosion/enemy-explosion-4.png" id="5_5grw8"]
 [ext_resource type="Texture2D" uid="uid://cumkex1rdpaq7" path="res://assets/warped city files/SPRITES/misc/enemy-explosion/enemy-explosion-5.png" id="6_ys8y5"]
 [ext_resource type="Texture2D" uid="uid://4bor3gol3skj" path="res://assets/warped city files/SPRITES/misc/enemy-explosion/enemy-explosion-6.png" id="7_cgddf"]
+[ext_resource type="PackedScene" uid="uid://djfcb0gpaeask" path="res://scenes/EnemeyHB.tscn" id="9_oxkib"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gdw06"]
 size = Vector2(39.5, 62)
@@ -94,8 +95,9 @@ shape = SubResource("RectangleShape2D_gdw06")
 
 [node name="robotAnimSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_aa68n")
-animation = &"death"
-frame_progress = 0.496738
+animation = &"patrolWalk"
 
 [node name="robotRay" type="RayCast2D" parent="."]
 position = Vector2(22, 2)
+
+[node name="EnemyHealthBar" parent="." instance=ExtResource("9_oxkib")]

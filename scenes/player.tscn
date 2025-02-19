@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dvpv2itrthwxn"]
+[gd_scene load_steps=40 format=3 uid="uid://dvpv2itrthwxn"]
 
 [ext_resource type="Texture2D" uid="uid://dq30xdp13brlq" path="res://assets/warped city files/SPRITES/player/shoot/shoot.png" id="1_6rxl6"]
 [ext_resource type="Script" path="res://scenes/scripts/player.gd" id="1_07jxr"]
@@ -35,6 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://dv02f4myenriv" path="res://assets/warped city files/SPRITES/player/run-shoot/run-shoot-8.png" id="17_01is3"]
 [ext_resource type="Texture2D" uid="uid://dpo5femtl3jyv" path="res://assets/warped city files/SPRITES/player/run/run-8.png" id="18_rs0ir"]
 [ext_resource type="Texture2D" uid="uid://cxdf03k1rww8w" path="res://assets/sprites/13.png" id="27_eo55x"]
+[ext_resource type="PackedScene" uid="uid://c2g4ddtwrw3i2" path="res://scenes/HealthBar.tscn" id="36_3c2uc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pl2to"]
 radius = 6.0
@@ -74,7 +75,7 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 100.0,
 "texture": ExtResource("9_14jpw")
 }],
 "loop": true,
@@ -203,8 +204,8 @@ shape = SubResource("CapsuleShape2D_pl2to")
 
 [node name="playerSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vl02s")
-animation = &"crouch"
-frame_progress = 0.135217
+animation = &"hurt"
+frame_progress = 0.366791
 
 [node name="bulletStart" type="Marker2D" parent="."]
 position = Vector2(40, -3)
@@ -219,3 +220,5 @@ sprite_frames = SubResource("SpriteFrames_i6u3t")
 target_position = Vector2(0, -35)
 collision_mask = 2
 hit_from_inside = true
+
+[node name="HealthBar" parent="." instance=ExtResource("36_3c2uc")]
