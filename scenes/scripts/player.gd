@@ -23,14 +23,17 @@ func _ready():
 	p_cam.make_current()
 
 func _physics_process(delta):
+	if global_position.y > 1040 and not is_on_floor():
+		get_tree().reload_current_scene()
+	
 	var ladder_collider = ladder_ray.get_collider()
-
 	if ladder_collider:
 		is_climbing = true
 		ladder_climb(delta)
 	else:
 		is_climbing = false
 		player_movement(delta)
+		
 		
 	move_and_slide()
 	
@@ -57,23 +60,21 @@ func _physics_process(delta):
 	if on_moving_platform and current_platform:
 		position += platform_velocity * delta
 
-func ladder_climb(delta):
+func ladder_climb(_delta):
 	var input := Vector2.ZERO
-
+	
 	player_sprite.play("climb")
 	input.x = Input.get_axis("move_left", "move_right")
 	input.y = Input.get_axis("move_up", "move_down")
-
-	if input != Vector2.ZERO:
-		velocity = input * CLIMB_SPEED
+	if input:
+		velocity = input*100
 	else:
 		velocity = Vector2.ZERO
-		if ladder_ray.get_collider():
+		if(ladder_ray.get_collider()):
 			player_sprite.pause()
-
+	#allows for jumping from ladder
 	if Input.is_action_just_pressed("jump"):
 		velocity.y = JUMP_FORCE
-		is_climbing = false
 		ladder_ray.set_collision_mask_value(2, false)
 
 func player_movement(delta):
@@ -97,6 +98,19 @@ func player_movement(delta):
 	if horizontal_move != 0 and is_on_floor():
 		velocity.x += horizontal_move * ACCELERATION * delta
 		player_sprite.flip_h = horizontal_move < 0
+				#changes bullet_start position bassed on the direction the player is facing
+		if(horizontal_move == -1):
+			#if statement reduces constant position change and flickering
+			if(bullet_start.position.x > 0):
+				bullet_start.rotation_degrees = 180
+				bullet_start.position.x = bullet_start.position.x*-1
+		elif (horizontal_move == 1):
+			#if statement reduces constant position change and flickering
+			if(bullet_start.position.x < 0):
+				bullet_start.rotation_degrees = 0
+				bullet_start.position.x = absf(bullet_start.position.x)
+		else: pass
+		
 	else:
 		if is_on_floor():
 			if velocity.length() > (FRICTION * delta) and not on_moving_platform:
@@ -130,10 +144,12 @@ func handle_animation(horizontal_move: float):
 func shoot():
 	var new_bullet = BULLET.instantiate()
 	new_bullet.dir = -1 if player_sprite.flip_h else 1
-	new_bullet.spawn_pos = bullet_start.global_position
+	new_bullet.spawnPos = bullet_start.global_position
 	get_tree().root.add_child(new_bullet)
 
-func hit():
+func hit(direction):
+	velocity.x += 300 * direction
+	move_and_slide()
 	player_sprite.play("hurt")
 	await get_tree().create_timer(0.5).timeout
 	if health <= 0:

@@ -312,7 +312,7 @@ tile_set = SubResource("TileSet_cefyh")
 
 [node name="Player" parent="." instance=ExtResource("2_li2ec")]
 position = Vector2(74, -338)
-collision_mask = 3
+floor_block_on_wall = false
 
 [node name="pCam" type="Camera2D" parent="Player"]
 visible = false
