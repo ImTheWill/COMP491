@@ -7,7 +7,7 @@ extends CharacterBody2D
 var speed = 60
 var facing_right = false
 var health = 100
-
+var points_per_kill = 100
 
 func _ready():
 	robot_anim_sprite.play("patrolWalk")
@@ -16,6 +16,7 @@ func _physics_process(delta):
 	if(health<=0):
 		robot_anim_sprite.play("death")
 		await get_tree().create_timer(.5).timeout
+		Global.score += points_per_kill
 		queue_free()
 	if not is_on_floor():
 		velocity.y += get_gravity().y *delta

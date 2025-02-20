@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://cd4tm0rkq5ys4"]
+[gd_scene load_steps=16 format=4 uid="uid://cd4tm0rkq5ys4"]
 
 [ext_resource type="Texture2D" uid="uid://d37hh44ma2yu1" path="res://assets/warped city files/ENVIRONMENT/tileset.png" id="1_1xdio"]
 [ext_resource type="Script" path="res://scenes/scripts/main_level.gd" id="1_515pj"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dgay74lfvj03a" path="res://scenes/robotEnemy.tscn" id="8_60fa1"]
 [ext_resource type="Script" path="res://scenes/animatable_body_2d.gd" id="9_bn3lm"]
 [ext_resource type="Texture2D" uid="uid://b74v53lvj0cfx" path="res://assets/sprites/Platform.png" id="9_v2pe6"]
+[ext_resource type="Script" path="res://scenes/currentscore_label.gd" id="11_7sft5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wbswo"]
 texture = ExtResource("1_1xdio")
@@ -313,6 +314,17 @@ tile_set = SubResource("TileSet_cefyh")
 [node name="Player" parent="." instance=ExtResource("2_li2ec")]
 position = Vector2(74, -338)
 floor_block_on_wall = false
+
+[node name="scoreLabel" type="StaticBody2D" parent="Player"]
+position = Vector2(-74, 338)
+
+[node name="currentscoreLabel" type="RichTextLabel" parent="Player/scoreLabel"]
+offset_left = 44.0
+offset_top = -413.0
+offset_right = 175.0
+offset_bottom = -373.0
+text = "Score: 000"
+script = ExtResource("11_7sft5")
 
 [node name="pCam" type="Camera2D" parent="Player"]
 visible = false
