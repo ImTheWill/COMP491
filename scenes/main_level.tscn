@@ -312,8 +312,7 @@ tile_map_data = PackedByteArray("AADn/wIAAAAHAAsAAADo/wIAAAAHAAsAAADp/wIAAAAHAAs
 tile_set = SubResource("TileSet_cefyh")
 
 [node name="Player" parent="." instance=ExtResource("2_li2ec")]
-position = Vector2(157, -339)
-collision_mask = 6
+position = Vector2(80, -334)
 floor_block_on_wall = false
 
 [node name="scoreLabel" type="StaticBody2D" parent="Player"]
@@ -339,7 +338,6 @@ position = Vector2(-199, -247)
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
 position = Vector2(157, -285)
-collision_layer = 2
 script = ExtResource("9_bn3lm")
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]

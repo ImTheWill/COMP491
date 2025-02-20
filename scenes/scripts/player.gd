@@ -29,7 +29,7 @@ func _physics_process(delta):
 	
 	#Ensure only ladders trigger climbing mode
 	var ladder_collider = ladder_ray.get_collider()
-	if ladder_collider and ladder_collider.is_in_group("Ladder"):
+	if ladder_collider:
 		is_climbing = true
 		ladder_climb(delta)
 	else:
