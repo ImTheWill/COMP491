@@ -15,7 +15,7 @@ func play_music():
 	play_menu_music(menu_music)
 
 #can be used for transition scenes later
-func play_FX(stream: AudioStream, volume = 0.0):
+func play_FX( volume = 0.0):
 	var fx_player = AudioStreamPlayer.new()
 	fx_player.stream = stream
 	fx_player.name = "FX_Player"

@@ -204,8 +204,7 @@ shape = SubResource("CapsuleShape2D_pl2to")
 
 [node name="playerSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vl02s")
-animation = &"hurt"
-frame_progress = 0.366791
+animation = &"idle"
 
 [node name="bulletStart" type="Marker2D" parent="."]
 position = Vector2(40, -3)
@@ -217,7 +216,7 @@ scale = Vector2(0.128486, 0.0868056)
 sprite_frames = SubResource("SpriteFrames_i6u3t")
 
 [node name="ladderRay" type="RayCast2D" parent="."]
-position = Vector2(0, 2)
+position = Vector2(0, 1)
 target_position = Vector2(0, -36)
 collision_mask = 2
 hit_from_inside = true

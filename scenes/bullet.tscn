@@ -22,7 +22,6 @@ animations = [{
 gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 200
-linear_velocity = Vector2(1000, 0)
 script = ExtResource("1_roxnh")
 
 [node name="collisionBullet" type="CollisionShape2D" parent="."]
