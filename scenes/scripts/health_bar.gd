@@ -17,7 +17,9 @@ func change_health(newValue):
 		styleBox.bg_color = Color("ca0020")
 		fill_change(HealthBar1, newValue)
 	HealthBar1.add_theme_stylebox_override("fill", styleBox)
-
+	
+	
+	
 func fill_change(healthBar, changeVal):
 	for i in abs(changeVal):
 		await get_tree().create_timer(0.05).timeout

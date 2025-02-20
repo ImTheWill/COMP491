@@ -73,9 +73,9 @@ show_percentage = false
 [node name="HealthBar2" type="ProgressBar" parent="."]
 layout_mode = 0
 offset_left = -32.0
-offset_top = -50.0
+offset_top = -51.0
 offset_right = 34.0
-offset_bottom = -37.0
+offset_bottom = -38.0
 theme_override_styles/background = SubResource("StyleBoxFlat_56wxb")
 theme_override_styles/fill = SubResource("StyleBoxFlat_c3ba4")
 step = 1.0
