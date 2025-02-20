@@ -57,6 +57,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if body is CharacterBody2D:
 			body.on_moving_platform = true
 			body.current_platform = self
+			body.is_climbing = false
 		print("Player entered platform:", body.name)
 
 func _on_area_2d_body_exited(body: Node2D) -> void:

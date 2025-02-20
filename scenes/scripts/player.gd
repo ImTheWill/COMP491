@@ -26,23 +26,30 @@ func _physics_process(delta):
 	if global_position.y > 1040 and not is_on_floor():
 		get_tree().reload_current_scene()
 	
+	#Ensure only ladders trigger climbing mode
 	var ladder_collider = ladder_ray.get_collider()
-	if ladder_collider:
+	if ladder_collider and ladder_collider.is_in_group("Ladder"):
 		is_climbing = true
 		ladder_climb(delta)
 	else:
 		is_climbing = false
 		player_movement(delta)
-		
-		
+	
+	#Apply platform movement before move_and_slide
+	if on_moving_platform and current_platform:
+		#player inherits platform velocity
+		velocity += platform_velocity
+	
 	move_and_slide()
 	
-	# Update platform interaction after move_and_slide
-	if is_on_floor():
+	# Platform Detection after movement
+	if is_on_floor() and not is_climbing:
 		var collision = get_last_slide_collision()
 		if collision:
 			var collider = collision.get_collider()
-			if collider is AnimatableBody2D:
+			
+			#ensure correct platform detection
+			if collider  and collider.is_in_group("MovingPlatform"):
 				current_platform = collider
 				on_moving_platform = true
 				# Directly sync with platform velocity
