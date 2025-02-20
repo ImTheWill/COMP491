@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var BULLET = load("res://scenes/bullet.tscn")
 @onready var bullet_start = $bulletStart
 @onready var ladder_ray = $ladderRay
+@onready var player_health_bar = $HealthBar
 
 const MAX_SPEED = 200
 const ACCELERATION = 1000
@@ -163,4 +164,5 @@ func hit(direction):
 		get_tree().reload_current_scene()
 	else:
 		health -= 10
+		player_health_bar.change_health(-10)
 	print("Damage taken, health is:", health)
