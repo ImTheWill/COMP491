@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://cd4tm0rkq5ys4"]
+[gd_scene load_steps=15 format=4 uid="uid://cd4tm0rkq5ys4"]
 
 [ext_resource type="Texture2D" uid="uid://d37hh44ma2yu1" path="res://assets/warped city files/ENVIRONMENT/tileset.png" id="1_1xdio"]
 [ext_resource type="Script" path="res://scenes/scripts/main_level.gd" id="1_515pj"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dgay74lfvj03a" path="res://scenes/robotEnemy.tscn" id="8_60fa1"]
 [ext_resource type="PackedScene" uid="uid://bka2pph1p0h4q" path="res://scenes/movingPlatform.tscn" id="10_wpuku"]
 [ext_resource type="Script" path="res://scenes/scripts/currentscore_label.gd" id="11_7sft5"]
+[ext_resource type="PackedScene" uid="uid://dbmjwrfpbhou1" path="res://scenes/botEnemy.tscn" id="12_4i8rg"]
 [ext_resource type="PackedScene" uid="uid://7ogrpfxvp8by" path="res://scenes/turrent_enemy.tscn" id="12_bnnr7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wbswo"]
@@ -236,7 +237,7 @@ physics_layer_1/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_wbswo")
 
 [node name="MainLevel" type="Node2D"]
-position = Vector2(402, 659)
+position = Vector2(403, 659)
 script = ExtResource("1_515pj")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -306,7 +307,7 @@ tile_map_data = PackedByteArray("AADn/wIAAAAHAAsAAADo/wIAAAAHAAsAAADp/wIAAAAHAAs
 tile_set = SubResource("TileSet_cefyh")
 
 [node name="Player" parent="." instance=ExtResource("2_li2ec")]
-position = Vector2(54, -337)
+position = Vector2(469, 3)
 floor_block_on_wall = false
 
 [node name="scoreLabel" type="StaticBody2D" parent="Player"]
@@ -333,4 +334,7 @@ position = Vector2(-199, -247)
 [node name="AnimatableBody2D" parent="." instance=ExtResource("10_wpuku")]
 
 [node name="turrentEnemy" parent="." instance=ExtResource("12_bnnr7")]
-position = Vector2(600, 14)
+position = Vector2(23, 12)
+
+[node name="botEnemy" parent="." instance=ExtResource("12_4i8rg")]
+position = Vector2(677, 0)

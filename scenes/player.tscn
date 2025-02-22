@@ -217,9 +217,8 @@ sprite_frames = SubResource("SpriteFrames_i6u3t")
 
 [node name="ladderRay" type="RayCast2D" parent="."]
 position = Vector2(0, 1)
-target_position = Vector2(0, -36)
+target_position = Vector2(0, -19)
 collision_mask = 2
-hit_from_inside = true
 collide_with_areas = true
 
 [node name="HealthBar" parent="." instance=ExtResource("36_3c2uc")]

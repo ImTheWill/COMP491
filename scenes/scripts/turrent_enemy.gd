@@ -29,9 +29,7 @@ func _physics_process(_delta):
 		queue_free()
 		
 	#check If player is nearby
-	print(timer.is_stopped())
 	if (turrColliderFront or turrColliderBack) && timer.is_stopped():
-		print(turrColliderFront or turrColliderBack)
 		turrent_sprite.flip_h = true if turrColliderFront else false
 		if turrColliderFront:
 			if(bullet_start.position.x > 0):

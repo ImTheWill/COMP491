@@ -1,0 +1,103 @@
+[gd_scene load_steps=18 format=3 uid="uid://dbmjwrfpbhou1"]
+
+[ext_resource type="Texture2D" uid="uid://cmjedgqw6scst" path="res://assets/warped city files/Warped-city-addon-files/Sprites/grasshopper-bot/grasshopper-bot1.png" id="1_5fccn"]
+[ext_resource type="Script" path="res://scenes/scripts/bot_enemy.gd" id="1_brr4g"]
+[ext_resource type="Texture2D" uid="uid://ct4p4pq28ru1i" path="res://assets/warped city files/SPRITES/misc/enemy-explosion/enemy-explosion-1.png" id="2_bmmi1"]
+[ext_resource type="Texture2D" uid="uid://de778kkp18422" path="res://assets/warped city files/Warped-city-addon-files/Sprites/grasshopper-bot/grasshopper-bot2.png" id="2_tu3h5"]
+[ext_resource type="Texture2D" uid="uid://chyp0pisitk7g" path="res://assets/warped city files/Warped-city-addon-files/Sprites/grasshopper-bot/grasshopper-bot3.png" id="3_1qxx1"]
+[ext_resource type="Texture2D" uid="uid://dubws005dcekv" path="res://assets/warped city files/SPRITES/misc/enemy-explosion/enemy-explosion-2.png" id="3_s88p3"]
+[ext_resource type="Texture2D" uid="uid://c863bajh3dn0c" path="res://assets/warped city files/Warped-city-addon-files/Sprites/grasshopper-bot/grasshopper-bot4.png" id="4_8h0mj"]
+[ext_resource type="Texture2D" uid="uid://c32ntyqmdmb4x" path="res://assets/warped city files/SPRITES/misc/enemy-explosion/enemy-explosion-3.png" id="4_m0j34"]
+[ext_resource type="Texture2D" uid="uid://j7uw2deqi81v" path="res://assets/warped city files/SPRITES/misc/enemy-explosion/enemy-explosion-4.png" id="5_2xc52"]
+[ext_resource type="Texture2D" uid="uid://dlsnrw5dw3l0h" path="res://assets/warped city files/Warped-city-addon-files/Sprites/grasshopper-bot/grasshopper-bot5.png" id="5_kpqwa"]
+[ext_resource type="Texture2D" uid="uid://cumkex1rdpaq7" path="res://assets/warped city files/SPRITES/misc/enemy-explosion/enemy-explosion-5.png" id="6_eetp0"]
+[ext_resource type="Texture2D" uid="uid://ccqyotc6oy0w0" path="res://assets/warped city files/Warped-city-addon-files/Sprites/grasshopper-bot/grasshopper-bot6.png" id="6_wv628"]
+[ext_resource type="Texture2D" uid="uid://4bor3gol3skj" path="res://assets/warped city files/SPRITES/misc/enemy-explosion/enemy-explosion-6.png" id="7_1ltyy"]
+[ext_resource type="Texture2D" uid="uid://cxdf03k1rww8w" path="res://assets/sprites/13.png" id="8_l07i5"]
+[ext_resource type="PackedScene" uid="uid://djfcb0gpaeask" path="res://scenes/EnemeyHB.tscn" id="9_3wdou"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ijxir"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("2_bmmi1")
+}, {
+"duration": 0.5,
+"texture": ExtResource("3_s88p3")
+}, {
+"duration": 0.5,
+"texture": ExtResource("4_m0j34")
+}, {
+"duration": 0.5,
+"texture": ExtResource("5_2xc52")
+}, {
+"duration": 0.5,
+"texture": ExtResource("6_eetp0")
+}, {
+"duration": 0.5,
+"texture": ExtResource("7_1ltyy")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5fccn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_tu3h5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1qxx1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8h0mj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kpqwa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wv628")
+}],
+"loop": true,
+"name": &"patrol",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hsc5s"]
+size = Vector2(16, 43)
+
+[node name="botEnemy" type="CharacterBody2D"]
+script = ExtResource("1_brr4g")
+
+[node name="botSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ijxir")
+animation = &"death"
+
+[node name="botCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 7)
+shape = SubResource("RectangleShape2D_hsc5s")
+
+[node name="bulletStart" type="Marker2D" parent="."]
+position = Vector2(21, 0)
+
+[node name="testSprite" type="Sprite2D" parent="bulletStart"]
+visible = false
+position = Vector2(12, 0)
+scale = Vector2(0.11255, 0.138889)
+texture = ExtResource("8_l07i5")
+
+[node name="botFloorRay" type="RayCast2D" parent="."]
+position = Vector2(12, 0)
+hit_from_inside = true
+
+[node name="botPlayerRay" type="RayCast2D" parent="."]
+target_position = Vector2(149, 0)
+hit_from_inside = true
+
+[node name="EnemyHealthBar" parent="." instance=ExtResource("9_3wdou")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
