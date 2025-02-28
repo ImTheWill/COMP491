@@ -15,7 +15,7 @@ func _physics_process(_delta):
 	pass
 
 func _on_body_entered(body):
-	if body is TileMapLayer || body is RigidBody2D:
+	if body is TileMapLayer || body is RigidBody2D || body is StaticBody2D:
 		queue_free()
 	else:
 		body.hit(0)

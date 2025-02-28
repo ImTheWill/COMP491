@@ -38,6 +38,6 @@ func flip():
 		speed = abs(speed)*-1
 	else:
 		speed = abs(speed)
-func hit():
+func hit(_direction):
 		health -= 10
 		enemy_health_bar.change_health(-10)
