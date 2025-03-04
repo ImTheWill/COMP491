@@ -18,10 +18,18 @@ var platform_velocity = Vector2.ZERO
 var on_moving_platform = false
 var current_platform = null
 var is_climbing = false
+var ladder_bottom_y: float
+var ladder_top_y:float
+var buffer_zone = 20
 
 func _ready():
 	add_to_group("Player")
 	p_cam.make_current()
+	
+	#Calculate ladder positions once
+	ladder_bottom_y = ladder_ray.global_position.y
+	ladder_top_y = ladder_ray.global_position.y - ladder_ray.target_position.y
+	
 
 func _physics_process(delta):
 	if global_position.y > 1040 and not is_on_floor():
@@ -29,28 +37,44 @@ func _physics_process(delta):
 	
 	#Ensure only ladders trigger climbing mode
 	var ladder_collider = ladder_ray.get_collider()
-	if ladder_collider:
+	
+	#Enter climbing mode if ladder is detected and player isn't on the floor
+	if ladder_collider and not is_on_floor():
 		is_climbing = true
 		ladder_climb(delta)
 	else:
-		is_climbing = false
-		player_movement(delta)
+		
+		#Exit climbing if player is on the floor or platform
+		if is_climbing and is_on_floor():
+			is_climbing = false
+			# Disable ladder ray
+			ladder_ray.set_collision_mask_value(2, false)
+		
+		#Ensure player movement is always processed when not climbing
+		if not is_climbing:
+			player_movement(delta)
+		
+		  
 	
 	#Apply platform movement before move_and_slide
 	if on_moving_platform and current_platform:
 		#player inherits platform velocity
-		velocity += platform_velocity
+		velocity += platform_velocity * delta
 	
 	move_and_slide()
 	
-	# Platform Detection after movement
-	if is_on_floor() and not is_climbing:
+	# Re-enable ladder detection when on floor
+	if is_on_floor() and not ladder_ray.is_colliding():
+		# Safely re-enables ladder detection
+		ladder_ray.set_collision_mask_value(2, true)
+		
+		#Platform Detection Logic (after ladder exit or landing)
 		var collision = get_last_slide_collision()
 		if collision:
 			var collider = collision.get_collider()
 			
-			#ensure correct platform detection
-			if collider  and collider.is_in_group("MovingPlatform"):
+			#Detect moving platforms even after ladder exit
+			if collider and collider.is_in_group("MovingPlatform"):
 				current_platform = collider
 				on_moving_platform = true
 				# Directly sync with platform velocity
@@ -63,25 +87,68 @@ func _physics_process(delta):
 		current_platform = null
 		on_moving_platform = false
 		platform_velocity = Vector2.ZERO
-
-	# Apply platform movement
-	if on_moving_platform and current_platform:
-		position += platform_velocity * delta
+		
 
 func ladder_climb(_delta):
 	var input := Vector2.ZERO
+	#Play animation when moving
+	if Input.is_action_pressed("move_up") or Input.is_action_pressed("move_down"):
+		player_sprite.play("climb")
+	else:
+		# Pause when idle
+		player_sprite.pause()
 	
-	player_sprite.play("climb")
+	#Capture input for climbing
 	input.x = Input.get_axis("move_left", "move_right")
 	input.y = Input.get_axis("move_up", "move_down")
-	if input:
-		velocity = input*100
+	
+	# Neutralize gravity during climbing
+	velocity.y = 0
+	
+	
+	
+	#Apply climbing movement
+	if input.y != 0:
+		velocity.y = input.y * CLIMB_SPEED
 	else:
-		velocity = Vector2.ZERO
-		if(ladder_ray.get_collider()):
-			player_sprite.pause()
+		velocity.y = 0
+	
+	
+	#check position
+	print("Ladder Bottom Y:", ladder_bottom_y)
+	print("Ladder Top Y:", ladder_top_y)
+	print("Player Y:", global_position.y)
+	print("Input Y:", input.y)
+	print("RayCast Colliding:", ladder_ray.is_colliding())
+	
+	
+	# Apply the velocity for climbing
+	move_and_slide() 
+
+	# Check if player is climbing
+	if is_climbing:
+		# Check if player has reached the top of the ladder
+		if global_position.y <= (ladder_top_y + buffer_zone) and input.y < 0:
+			# Player is climbing up and has reached the top
+			print("Reached the top of the ladder")
+			is_climbing = false
+			ladder_ray.enabled = false
+			ladder_ray.set_collision_mask_value(2, false)
+			velocity = Vector2.ZERO
+			print("Exited ladder at the top")
+		elif global_position.y > ladder_top_y:
+			# Player has moved above the ladder top
+			print("Player moved above the ladder top")
+			is_climbing = false
+			ladder_ray.enabled = false
+			ladder_ray.set_collision_mask_value(2, false)
+			velocity = Vector2.ZERO
+			print("Exited ladder at the top due to height")
+
 	#allows for jumping from ladder
 	if Input.is_action_just_pressed("jump"):
+		# Exit climbing mode on jump
+		is_climbing = false
 		velocity.y = JUMP_FORCE
 		ladder_ray.set_collision_mask_value(2, false)
 

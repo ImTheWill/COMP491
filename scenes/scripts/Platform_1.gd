@@ -1,6 +1,7 @@
 extends AnimatableBody2D
 
-@export var move_distance: float = 300
+@export var move_distance_x: float = 300
+@export var move_distance_y: float = 530
 @export var move_speed: float = 80
 @export var move_direction: Vector2 = Vector2(1, 0)
 
@@ -13,8 +14,19 @@ var passengers: Array[CharacterBody2D] = []
 @onready var area_2d = $Area2D
 
 func _ready():
+	
+	print("Setting up Moving Platform...")
+	
+	#Set the target position based on the move direction
 	start_position = global_position
-	target_position = start_position + move_direction * move_distance
+	
+	#Compute target position using separate X and Y distance
+	var distance_x = move_distance_x if move_direction.x != 0 else 0
+	var distance_y = move_distance_y if move_direction.y != 0 else 0
+	
+	target_position = start_position + Vector2(distance_x, distance_y)
+	
+	print("Start: ", start_position, "-> Target: ", target_position)
 	
 	# Ensure signals are connected
 	if !area_2d.body_entered.is_connected(_on_area_2d_body_entered):
@@ -31,13 +43,19 @@ func _physics_process(delta):
 	if moving_forward:
 		velocity = move_direction * move_speed
 		global_position += velocity * delta
-		if global_position.distance_to(target_position) <= move_speed * delta:
+		
+		if (move_direction.x != 0 and global_position.x >= target_position.x) or \
+		   (move_direction.y != 0 and global_position.y >= target_position.y):
+			
 			global_position = target_position
 			moving_forward = false
+			
 	else:
 		velocity = -move_direction * move_speed
 		global_position += velocity * delta
-		if global_position.distance_to(start_position) <= move_speed * delta:
+		if (move_direction.x != 0 and global_position.x <= start_position.x) or \
+		   (move_direction.y != 0 and global_position.y <= start_position.y):
+			
 			global_position = start_position
 			moving_forward = true
 
