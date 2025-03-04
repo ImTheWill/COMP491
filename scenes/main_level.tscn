@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://cd4tm0rkq5ys4"]
+[gd_scene load_steps=17 format=4 uid="uid://cd4tm0rkq5ys4"]
 
 [ext_resource type="Texture2D" uid="uid://d37hh44ma2yu1" path="res://assets/warped city files/ENVIRONMENT/tileset.png" id="1_1xdio"]
 [ext_resource type="Script" path="res://scenes/scripts/main_level.gd" id="1_515pj"]
@@ -237,6 +237,9 @@ physics_layer_1/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_wbswo")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4ase6"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_unmyc"]
 normal = Vector2(-1, 0)
 
 [node name="MainLevel" type="Node2D"]
@@ -311,7 +314,7 @@ tile_map_data = PackedByteArray("AADn/wIAAAAHAAsAAADo/wIAAAAHAAsAAADp/wIAAAAHAAs
 tile_set = SubResource("TileSet_cefyh")
 
 [node name="Player" parent="." instance=ExtResource("2_li2ec")]
-position = Vector2(-340, -116)
+position = Vector2(-331, -111)
 floor_block_on_wall = false
 
 [node name="scoreLabel" type="StaticBody2D" parent="Player"]
@@ -349,6 +352,6 @@ position = Vector2(677, 0)
 position = Vector2(-402, -84)
 shape = SubResource("WorldBoundaryShape2D_4ase6")
 
-[node name="rightBorder" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(2591, -7)
-shape = SubResource("WorldBoundaryShape2D_4ase6")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(2591, -85)
+shape = SubResource("WorldBoundaryShape2D_unmyc")
