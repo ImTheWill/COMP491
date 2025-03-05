@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://cd4tm0rkq5ys4"]
+[gd_scene load_steps=22 format=4 uid="uid://cd4tm0rkq5ys4"]
 
 [ext_resource type="Texture2D" uid="uid://d37hh44ma2yu1" path="res://assets/warped city files/ENVIRONMENT/tileset.png" id="1_1xdio"]
 [ext_resource type="Script" path="res://scenes/scripts/main_level.gd" id="1_515pj"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://7ogrpfxvp8by" path="res://scenes/turrent_enemy.tscn" id="12_bnnr7"]
 [ext_resource type="PackedScene" uid="uid://tid5g5688vuc" path="res://scenes/Platform2.tscn" id="13_27hes"]
 [ext_resource type="PackedScene" uid="uid://lne4glp265on" path="res://scenes/Platform4.tscn" id="13_aeqox"]
-[ext_resource type="Script" path="res://scenes/test_camera.gd" id="14_jkjab"]
 [ext_resource type="PackedScene" uid="uid://by7hl2iqsymyg" path="res://scenes/Platform5.tscn" id="14_na73q"]
 [ext_resource type="PackedScene" uid="uid://dciiyt3nonml1" path="res://scenes/Platform3.tscn" id="15_2avj7"]
 [ext_resource type="PackedScene" uid="uid://dqi883p6rrh54" path="res://scenes/Platform6.tscn" id="15_lfa3d"]
@@ -320,7 +319,6 @@ tile_map_data = PackedByteArray("AADn/wIAAAAHAAsAAADo/wIAAAAHAAsAAADp/wIAAAAHAAs
 tile_set = SubResource("TileSet_cefyh")
 
 [node name="Player" parent="." instance=ExtResource("2_li2ec")]
-visible = false
 position = Vector2(-331, -111)
 floor_block_on_wall = false
 
@@ -382,7 +380,3 @@ shape = SubResource("WorldBoundaryShape2D_4ase6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(2591, -85)
 shape = SubResource("WorldBoundaryShape2D_unmyc")
-
-[node name="TestCamera" type="Camera2D" parent="."]
-position = Vector2(1940, -253)
-script = ExtResource("14_jkjab")
