@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var bullet_start = $bulletStart
 @onready var ladder_ray = $ladderRay
 @onready var player_health_bar = $HealthBar
+@onready var gun = $Gun
 
 const MAX_SPEED = 200
 const ACCELERATION = 1000
@@ -18,6 +19,7 @@ var platform_velocity = Vector2.ZERO
 var on_moving_platform = false
 var current_platform = null
 var is_climbing = false
+var BulletScene = preload("res://scenes/bullet.tscn")
 
 func _ready():
 	add_to_group("Player")
@@ -29,7 +31,7 @@ func _physics_process(delta):
 	
 	#Ensure only ladders trigger climbing mode
 	var ladder_collider = ladder_ray.get_collider()
-	if ladder_collider:
+	if ladder_collider: # && interact button is pressed
 		is_climbing = true
 		ladder_climb(delta)
 	else:
@@ -150,10 +152,24 @@ func handle_animation(horizontal_move: float):
 		player_sprite.play("jump")
 
 func shoot():
-	var new_bullet = BULLET.instantiate()
-	new_bullet.dir = -1 if player_sprite.flip_h else 1
-	new_bullet.spawnPos = bullet_start.global_position
-	get_tree().root.add_child(new_bullet)
+	var bullet = BulletScene.instantiate()
+	# Set bullet's starting position and rotation.
+	bullet.position = gun.global_position
+	bullet.rotation = gun.rotation
+	# Add bullet to the scene (usually as a sibling of the player).
+	get_parent().add_child(bullet)
+#	var new_bullet = BULLET.instantiate()
+#	new_bullet.dir = -1 if player_sprite.flip_h else 1
+#	new_bullet.spawnPos = bullet_start.global_position
+#	get_tree().root.add_child(new_bullet)
+
+func aim_process(delta):
+	#get mouse position in world space
+	var target_pos = get_global_mouse_position()
+	#calculate the direction vector from the player to the target
+	var direction = target_pos - gun.global_position
+	#set the bullet's rotation to the angle of that vector
+	gun.rotation = direction.angle()
 
 func hit(direction):
 	velocity.x += 300 * direction

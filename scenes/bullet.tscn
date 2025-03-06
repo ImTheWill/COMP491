@@ -1,37 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqujcfsmcebqs"]
+[gd_scene load_steps=2 format=3 uid="uid://dqujcfsmcebqs"]
 
-[ext_resource type="Texture2D" uid="uid://cxdf03k1rww8w" path="res://assets/sprites/13.png" id="1_cunik"]
 [ext_resource type="Script" path="res://scenes/scripts/bullet.gd" id="1_roxnh"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a0nsi"]
-radius = 7.0
-height = 84.0
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_617mb"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_cunik")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[node name="bullet" type="RigidBody2D"]
-gravity_scale = 0.0
-contact_monitor = true
-max_contacts_reported = 200
+[node name="Rigid2D" type="RigidBody2D"]
 script = ExtResource("1_roxnh")
-
-[node name="collisionBullet" type="CollisionShape2D" parent="."]
-position = Vector2(6, 0)
-rotation = 1.5708
-scale = Vector2(0.2, 0.152)
-shape = SubResource("CapsuleShape2D_a0nsi")
-
-[node name="bulletSprite" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.2, 0.152)
-sprite_frames = SubResource("SpriteFrames_617mb")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

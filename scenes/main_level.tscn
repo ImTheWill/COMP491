@@ -327,6 +327,8 @@ limit_left = 0
 limit_top = 0
 limit_bottom = 880
 
+[node name="Gun" type="Node2D" parent="Player"]
+
 [node name="robotEnemy" parent="." instance=ExtResource("8_60fa1")]
 position = Vector2(-199, -247)
 
