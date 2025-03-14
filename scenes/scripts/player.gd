@@ -158,10 +158,11 @@ func shoot():
 	bullet.rotation = gun.rotation
 	# Add bullet to the scene (usually as a sibling of the player).
 	get_parent().add_child(bullet)
-#	var new_bullet = BULLET.instantiate()
-#	new_bullet.dir = -1 if player_sprite.flip_h else 1
-#	new_bullet.spawnPos = bullet_start.global_position
-#	get_tree().root.add_child(new_bullet)
+	var new_bullet = BULLET.instantiate()
+	print_debug()
+	new_bullet.dir = -1 if player_sprite.flip_h else 1
+	new_bullet.spawnPos = bullet_start.global_position
+	get_tree().root.add_child(new_bullet)
 
 func aim_process(delta):
 	#get mouse position in world space

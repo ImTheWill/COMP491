@@ -6,10 +6,10 @@ var dir: int
 var speed = 1000
 
 #work on collison
-#func _ready():
-#	position = spawnPos
-#	scale.x = scale.x*dir
-#	linear_velocity.x = speed * dir
+func _ready():
+	position = spawnPos
+	scale.x = scale.x*dir
+	linear_velocity.x = speed * dir
 func _physics_process(delta):
 	var velocity = Vector2(cos(rotation), sin(rotation)) * speed
 	position += velocity * delta
