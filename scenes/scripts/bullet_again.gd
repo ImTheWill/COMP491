@@ -9,4 +9,8 @@ func _process(delta):
 	global_position += move_direction * delta * speed
 
 func _on_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
+	if body is robot_Enemy:
+		body.hit()
+	
+	queue_free() 
+ 
