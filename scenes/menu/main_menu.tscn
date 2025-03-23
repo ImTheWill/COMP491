@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://boxnbrl2envop"]
 
-[ext_resource type="Script" path="res://scenes/scripts/menu_scripts/main_menu.gd" id="1_atxup"]
+[ext_resource type="Script" path="res://scripts/menu_scripts/main_menu.gd" id="1_atxup"]
 [ext_resource type="Texture2D" uid="uid://xhpi361ashdk" path="res://assets/Rusted Music Studio - Assets/Rusted (9).png" id="2_iki6w"]
 [ext_resource type="FontFile" uid="uid://bm22e4yafek3d" path="res://assets/fonts/Minecraft.ttf" id="3_67ugh"]
 [ext_resource type="Texture2D" uid="uid://c3k6w0dxsxmch" path="res://assets/fonts/audio.png" id="4_t43sj"]

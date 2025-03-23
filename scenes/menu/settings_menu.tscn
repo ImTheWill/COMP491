@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://b6wio0jdy4h7t"]
 
 [ext_resource type="Texture2D" uid="uid://m4p5ijggeqg0" path="res://assets/Rusted Music Studio - Assets/Rusted (24).png" id="1_0e5l6"]
-[ext_resource type="Script" path="res://scenes/scripts/menu_scripts/settings_menu.gd" id="1_1ri5y"]
+[ext_resource type="Script" path="res://scripts/menu_scripts/settings_menu.gd" id="1_1ri5y"]
 [ext_resource type="FontFile" uid="uid://bm22e4yafek3d" path="res://assets/fonts/Minecraft.ttf" id="3_xo42u"]
-[ext_resource type="Script" path="res://scenes/scripts/menu_scripts/window_mode_butt.gd" id="4_btk12"]
-[ext_resource type="Script" path="res://scenes/scripts/menu_scripts/resolution.gd" id="5_mkpgn"]
-[ext_resource type="Script" path="res://scenes/scripts/menu_scripts/InputSettings.gd" id="6_ij5qd"]
+[ext_resource type="Script" path="res://scripts/menu_scripts/window_mode_butt.gd" id="4_btk12"]
+[ext_resource type="Script" path="res://scripts/menu_scripts/resolution.gd" id="5_mkpgn"]
+[ext_resource type="Script" path="res://scripts/menu_scripts/InputSettings.gd" id="6_ij5qd"]
 [ext_resource type="PackedScene" uid="uid://bvkknqylfrl5j" path="res://scenes/menu/input_button.tscn" id="7_y62me"]
-[ext_resource type="Script" path="res://scenes/scripts/menu_scripts/volume_slider.gd" id="8_y2xfi"]
+[ext_resource type="Script" path="res://scripts/menu_scripts/volume_slider.gd" id="8_y2xfi"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_juudm"]
 texture = ExtResource("1_0e5l6")

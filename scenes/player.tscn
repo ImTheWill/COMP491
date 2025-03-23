@@ -1,7 +1,7 @@
 [gd_scene load_steps=40 format=3 uid="uid://dvpv2itrthwxn"]
 
 [ext_resource type="Texture2D" uid="uid://dq30xdp13brlq" path="res://assets/warped city files/SPRITES/player/shoot/shoot.png" id="1_6rxl6"]
-[ext_resource type="Script" path="res://scenes/scripts/player.gd" id="1_07jxr"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_07jxr"]
 [ext_resource type="Texture2D" uid="uid://bbm43w31m037j" path="res://assets/warped city files/SPRITES/player/climb/climb-1.png" id="2_8x1tm"]
 [ext_resource type="Texture2D" uid="uid://d31curb8lhyce" path="res://assets/warped city files/SPRITES/player/idle/idle-1.png" id="2_mo1kp"]
 [ext_resource type="Texture2D" uid="uid://ckle80eeufcy1" path="res://assets/warped city files/SPRITES/player/crouch/crouch.png" id="2_xqsgy"]

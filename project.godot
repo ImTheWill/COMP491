@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 
 AudioPlayer="*res://scenes/menu/AudioPlayer.tscn"
 ConfigFileHandler="*res://ConfigFileHandler.gd"
-Global="*res://scenes/scripts/global.gd"
+Global="*res://scripts/global.gd"
 
 [display]
 

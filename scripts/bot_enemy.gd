@@ -23,7 +23,7 @@ func _physics_process(delta):
 		await get_tree().create_timer(.5).timeout
 		Global.score += points_per_kill
 		queue_free()
-	print(timer.is_stopped())
+	#print(timer.is_stopped())
 	if botPlayerRay && timer.is_stopped():
 		shoot()
 	if not is_on_floor():

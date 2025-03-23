@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://dbmjwrfpbhou1"]
 
 [ext_resource type="Texture2D" uid="uid://cmjedgqw6scst" path="res://assets/warped city files/Warped-city-addon-files/Sprites/grasshopper-bot/grasshopper-bot1.png" id="1_5fccn"]
-[ext_resource type="Script" path="res://scenes/scripts/bot_enemy.gd" id="1_brr4g"]
+[ext_resource type="Script" path="res://scripts/bot_enemy.gd" id="1_brr4g"]
 [ext_resource type="Texture2D" uid="uid://ct4p4pq28ru1i" path="res://assets/warped city files/SPRITES/misc/enemy-explosion/enemy-explosion-1.png" id="2_bmmi1"]
 [ext_resource type="Texture2D" uid="uid://de778kkp18422" path="res://assets/warped city files/Warped-city-addon-files/Sprites/grasshopper-bot/grasshopper-bot2.png" id="2_tu3h5"]
 [ext_resource type="Texture2D" uid="uid://chyp0pisitk7g" path="res://assets/warped city files/Warped-city-addon-files/Sprites/grasshopper-bot/grasshopper-bot3.png" id="3_1qxx1"]
