@@ -72,8 +72,9 @@ size = Vector2(16, 43)
 script = ExtResource("1_brr4g")
 
 [node name="botSprite" type="AnimatedSprite2D" parent="."]
+rotation = -0.00703511
 sprite_frames = SubResource("SpriteFrames_ijxir")
-animation = &"death"
+animation = &"patrol"
 
 [node name="botCollision" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 7)

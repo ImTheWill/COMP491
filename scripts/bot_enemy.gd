@@ -45,7 +45,6 @@ func flip():
 	elif(bullet_start.position.x < 0):
 		bullet_start.rotation_degrees = 0
 		bullet_start.position.x = absf(bullet_start.position.x)
-	print(bullet_start.position.x)
 		
 	facing_right = !facing_right
 	bot_sprite.flip_h = facing_right

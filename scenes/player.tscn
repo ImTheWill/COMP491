@@ -216,9 +216,15 @@ scale = Vector2(0.128486, 0.0868056)
 sprite_frames = SubResource("SpriteFrames_i6u3t")
 
 [node name="ladderRay" type="RayCast2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(0, 8)
 target_position = Vector2(0, -19)
 collision_mask = 2
 collide_with_areas = true
 
 [node name="HealthBar" parent="." instance=ExtResource("36_3c2uc")]
+
+[node name="ladderCheckerRay" type="RayCast2D" parent="."]
+position = Vector2(0, 1)
+target_position = Vector2(0, -26)
+collision_mask = 2
+collide_with_areas = true

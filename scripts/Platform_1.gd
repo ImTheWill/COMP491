@@ -21,8 +21,8 @@ func _ready():
 	start_position = global_position
 	
 	#Compute target position using separate X and Y distance
-	var distance_x = move_distance_x if move_direction.x != 0 else 0
-	var distance_y = move_distance_y if move_direction.y != 0 else 0
+	var distance_x = move_distance_x if move_direction.x != 0.0 else 0.0
+	var distance_y = move_distance_y if move_direction.y != 0.0 else 0.0
 	
 	target_position = start_position + Vector2(distance_x, distance_y)
 	

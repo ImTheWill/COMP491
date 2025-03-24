@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var boss_player_ray = $bossPlayerRay
-@onready var boss_floor_ray = $bossFloorRay2
+@onready var boss_floor_ray = $bossFloorRay
 @onready var boss_health_bar = $bossHealthBar
 @onready var boss_sprite = $bossSprite
 
@@ -13,7 +13,7 @@ func _ready():
 	boss_sprite.play("idle")
 	add_to_group("Enemy")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	
 	#if boss dies, play death animation and add points
 	if(health<=0):
