@@ -1,6 +1,6 @@
-[gd_scene load_steps=60 format=3 uid="uid://cc2q4ajap1nf"]
+[gd_scene load_steps=61 format=3 uid="uid://cc2q4ajap1nf"]
 
-[ext_resource type="Script" path="res://scripts/boss_enemy.gd" id="1_lqy0t"]
+[ext_resource type="Script" path="res://scripts/bossEnemy.gd" id="1_lqy0t"]
 [ext_resource type="Texture2D" uid="uid://ch0fgbw08pbnc" path="res://assets/sprites/DemonBoss/individual sprites/03_demon_cleave/demon_cleave_1.png" id="1_r3kwy"]
 [ext_resource type="Texture2D" uid="uid://df6yuipl6jycf" path="res://assets/sprites/DemonBoss/individual sprites/01_demon_idle/demon_idle_1.png" id="1_whr2n"]
 [ext_resource type="Texture2D" uid="uid://ch4vts22fdp7l" path="res://assets/sprites/DemonBoss/individual sprites/03_demon_cleave/demon_cleave_2.png" id="2_fv841"]
@@ -302,7 +302,10 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="boss_enemy" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_drorf"]
+size = Vector2(82, 66)
+
+[node name="bossEnemy" type="CharacterBody2D"]
 script = ExtResource("1_lqy0t")
 
 [node name="bossCollision" type="CollisionShape2D" parent="."]
@@ -312,13 +315,16 @@ shape = SubResource("RectangleShape2D_tvxrm")
 [node name="bossSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -80)
 sprite_frames = SubResource("SpriteFrames_a31mn")
-animation = &"death"
-
-[node name="bossFloorRay" type="RayCast2D" parent="."]
-position = Vector2(32, 0)
-target_position = Vector2(0, 64)
-
-[node name="bossPlayerRay" type="RayCast2D" parent="."]
-target_position = Vector2(154, 0)
+animation = &"cleave"
 
 [node name="bossHealthBar" parent="." instance=ExtResource("57_xora1")]
+offset_top = -57.0
+offset_right = 1.0
+
+[node name="attackHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attackHitbox"]
+position = Vector2(-66, -34)
+shape = SubResource("RectangleShape2D_drorf")
+
+[connection signal="body_entered" from="attackHitbox" to="." method="_on_attack_hitbox_body_entered"]
