@@ -166,7 +166,7 @@ func shoot():
 	get_tree().root.add_child(new_bullet)
 
 func hit(direction):
-	velocity.x += 300 * direction
+#	velocity.x += 300 * direction
 	move_and_slide()
 	player_sprite.play("hurt")
 	await get_tree().create_timer(0.5).timeout
