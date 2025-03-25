@@ -35,7 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://dv02f4myenriv" path="res://assets/warped city files/SPRITES/player/run-shoot/run-shoot-8.png" id="17_01is3"]
 [ext_resource type="Texture2D" uid="uid://dpo5femtl3jyv" path="res://assets/warped city files/SPRITES/player/run/run-8.png" id="18_rs0ir"]
 [ext_resource type="Texture2D" uid="uid://cxdf03k1rww8w" path="res://assets/sprites/13.png" id="27_eo55x"]
-[ext_resource type="PackedScene" uid="uid://c2g4ddtwrw3i2" path="res://scenes/HealthBar.tscn" id="36_3c2uc"]
+[ext_resource type="PackedScene" uid="uid://c2g4ddtwrw3i2" path="res://scenes/player/HealthBar.tscn" id="36_3c2uc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pl2to"]
 radius = 6.0

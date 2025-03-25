@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var p_cam = $pCam
 @onready var player_sprite = $playerSprite
-@onready var BULLET = load("res://scenes/bullet.tscn")
+@onready var BULLET = load("res://scenes/player/bullet.tscn")
 @onready var bullet_start = $bulletStart
 @onready var ladder_ray = $ladderRay
 @onready var player_health_bar = $HealthBar

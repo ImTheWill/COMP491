@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cqqfjji7qux1x" path="res://assets/warped city files/SPRITES/misc/turret/turret-6.png" id="6_dbvys"]
 [ext_resource type="Texture2D" uid="uid://cumkex1rdpaq7" path="res://assets/warped city files/SPRITES/misc/enemy-explosion/enemy-explosion-5.png" id="6_rlkb6"]
 [ext_resource type="Texture2D" uid="uid://4bor3gol3skj" path="res://assets/warped city files/SPRITES/misc/enemy-explosion/enemy-explosion-6.png" id="7_wey85"]
-[ext_resource type="PackedScene" uid="uid://djfcb0gpaeask" path="res://scenes/EnemeyHB.tscn" id="8_gv463"]
+[ext_resource type="PackedScene" uid="uid://djfcb0gpaeask" path="res://scenes/enemies/EnemeyHB.tscn" id="8_gv463"]
 [ext_resource type="Texture2D" uid="uid://cxdf03k1rww8w" path="res://assets/sprites/13.png" id="15_s6ef6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p7tnk"]

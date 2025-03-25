@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://j7uw2deqi81v" path="res://assets/warped city files/SPRITES/misc/enemy-explosion/enemy-explosion-4.png" id="5_5grw8"]
 [ext_resource type="Texture2D" uid="uid://cumkex1rdpaq7" path="res://assets/warped city files/SPRITES/misc/enemy-explosion/enemy-explosion-5.png" id="6_ys8y5"]
 [ext_resource type="Texture2D" uid="uid://4bor3gol3skj" path="res://assets/warped city files/SPRITES/misc/enemy-explosion/enemy-explosion-6.png" id="7_cgddf"]
-[ext_resource type="PackedScene" uid="uid://djfcb0gpaeask" path="res://scenes/EnemeyHB.tscn" id="9_oxkib"]
+[ext_resource type="PackedScene" uid="uid://djfcb0gpaeask" path="res://scenes/enemies/EnemeyHB.tscn" id="9_oxkib"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gdw06"]
 size = Vector2(39.5, 62)
