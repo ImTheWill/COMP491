@@ -56,7 +56,7 @@
 [ext_resource type="Texture2D" uid="uid://k8b37ilsrulm" path="res://assets/sprites/DemonBoss/individual sprites/05_demon_death/demon_death_20.png" id="35_xy2ek"]
 [ext_resource type="Texture2D" uid="uid://tyb40r7hpgvg" path="res://assets/sprites/DemonBoss/individual sprites/05_demon_death/demon_death_21.png" id="36_2ot8u"]
 [ext_resource type="Texture2D" uid="uid://dq8mpy26knlff" path="res://assets/sprites/DemonBoss/individual sprites/05_demon_death/demon_death_22.png" id="37_akpas"]
-[ext_resource type="PackedScene" uid="uid://c2g4ddtwrw3i2" path="res://scenes/HealthBar.tscn" id="57_xora1"]
+[ext_resource type="PackedScene" uid="uid://c2g4ddtwrw3i2" path="res://scenes/UI/HealthBar.tscn" id="57_xora1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tvxrm"]
 size = Vector2(51.25, 67.5)

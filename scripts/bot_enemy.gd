@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var bullet_start = $bulletStart
 @onready var bot_sprite = $botSprite
 @onready var timer = $Timer
-@onready var BULLET = load("res://scenes/bullet.tscn")
+@onready var BULLET = load("res://scenes/player/bullet.tscn")
 
 var speed = 60
 var facing_right = false

@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var turrent_sprite = $turrentSprite
 @onready var turrent_collision = $turrentCollision
 @onready var enemy_health_bar = $EnemyHealthBar
-@onready var BULLET = load("res://scenes/bullet.tscn")
+@onready var BULLET = load("res://scenes/player/bullet.tscn")
 @onready var bullet_start = $bulletStart
 @onready var timer = $Timer
 

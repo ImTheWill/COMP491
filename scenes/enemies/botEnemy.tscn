@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://ccqyotc6oy0w0" path="res://assets/warped city files/Warped-city-addon-files/Sprites/grasshopper-bot/grasshopper-bot6.png" id="6_wv628"]
 [ext_resource type="Texture2D" uid="uid://4bor3gol3skj" path="res://assets/warped city files/SPRITES/misc/enemy-explosion/enemy-explosion-6.png" id="7_1ltyy"]
 [ext_resource type="Texture2D" uid="uid://cxdf03k1rww8w" path="res://assets/sprites/13.png" id="8_l07i5"]
-[ext_resource type="PackedScene" uid="uid://djfcb0gpaeask" path="res://scenes/EnemeyHB.tscn" id="9_3wdou"]
+[ext_resource type="PackedScene" uid="uid://djfcb0gpaeask" path="res://scenes/UI/EnemeyHB.tscn" id="9_3wdou"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ijxir"]
 animations = [{

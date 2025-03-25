@@ -2,24 +2,24 @@
 
 [ext_resource type="Texture2D" uid="uid://d37hh44ma2yu1" path="res://assets/warped city files/ENVIRONMENT/tileset.png" id="1_1xdio"]
 [ext_resource type="Script" path="res://scripts/main_level.gd" id="1_515pj"]
-[ext_resource type="PackedScene" uid="uid://dvpv2itrthwxn" path="res://scenes/player.tscn" id="2_li2ec"]
+[ext_resource type="PackedScene" uid="uid://dvpv2itrthwxn" path="res://scenes/player/player.tscn" id="2_li2ec"]
 [ext_resource type="Texture2D" uid="uid://db8kkg7k2kmwh" path="res://assets/Sunset/sky.png" id="4_enklt"]
 [ext_resource type="Texture2D" uid="uid://c0ddwf8talk5j" path="res://assets/Sunset/sun.png" id="5_nd64g"]
 [ext_resource type="Texture2D" uid="uid://cqkcxtbgfljvn" path="res://assets/Sunset/far-buildings.png" id="6_inpae"]
 [ext_resource type="Texture2D" uid="uid://7a1c7r16ds07" path="res://assets/Sunset/near-buildings.png" id="7_xk3jm"]
-[ext_resource type="PackedScene" uid="uid://dgay74lfvj03a" path="res://scenes/robotEnemy.tscn" id="8_60fa1"]
-[ext_resource type="PackedScene" uid="uid://bka2pph1p0h4q" path="res://scenes/Platform1.tscn" id="10_wpuku"]
+[ext_resource type="PackedScene" uid="uid://dgay74lfvj03a" path="res://scenes/enemies/robotEnemy.tscn" id="8_60fa1"]
+[ext_resource type="PackedScene" uid="uid://bka2pph1p0h4q" path="res://scenes/platforms/Platform1.tscn" id="10_wpuku"]
 [ext_resource type="Script" path="res://scripts/currentscore_label.gd" id="11_7sft5"]
-[ext_resource type="PackedScene" uid="uid://dbmjwrfpbhou1" path="res://scenes/botEnemy.tscn" id="12_4i8rg"]
-[ext_resource type="PackedScene" uid="uid://7ogrpfxvp8by" path="res://scenes/turrent_enemy.tscn" id="12_bnnr7"]
-[ext_resource type="PackedScene" uid="uid://tid5g5688vuc" path="res://scenes/Platform2.tscn" id="13_27hes"]
-[ext_resource type="PackedScene" uid="uid://lne4glp265on" path="res://scenes/Platform4.tscn" id="13_aeqox"]
-[ext_resource type="PackedScene" uid="uid://by7hl2iqsymyg" path="res://scenes/Platform5.tscn" id="14_na73q"]
-[ext_resource type="PackedScene" uid="uid://dciiyt3nonml1" path="res://scenes/Platform3.tscn" id="15_2avj7"]
-[ext_resource type="PackedScene" uid="uid://dqi883p6rrh54" path="res://scenes/Platform6.tscn" id="15_lfa3d"]
-[ext_resource type="PackedScene" uid="uid://cc2q4ajap1nf" path="res://scenes/bossEnemy.tscn" id="18_vyt7q"]
+[ext_resource type="PackedScene" uid="uid://dbmjwrfpbhou1" path="res://scenes/enemies/botEnemy.tscn" id="12_4i8rg"]
+[ext_resource type="PackedScene" uid="uid://7ogrpfxvp8by" path="res://scenes/enemies/turrent_enemy.tscn" id="12_bnnr7"]
+[ext_resource type="PackedScene" uid="uid://tid5g5688vuc" path="res://scenes/platforms/Platform2.tscn" id="13_27hes"]
+[ext_resource type="PackedScene" uid="uid://lne4glp265on" path="res://scenes/platforms/Platform4.tscn" id="13_aeqox"]
+[ext_resource type="PackedScene" uid="uid://by7hl2iqsymyg" path="res://scenes/platforms/Platform5.tscn" id="14_na73q"]
+[ext_resource type="PackedScene" uid="uid://dciiyt3nonml1" path="res://scenes/platforms/Platform3.tscn" id="15_2avj7"]
+[ext_resource type="PackedScene" uid="uid://dqi883p6rrh54" path="res://scenes/platforms/Platform6.tscn" id="15_lfa3d"]
+[ext_resource type="PackedScene" uid="uid://cc2q4ajap1nf" path="res://scenes/enemies/bossEnemy.tscn" id="18_vyt7q"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wbswo"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l16ne"]
 texture = ExtResource("1_1xdio")
 1:1/0 = 0
 1:1/0/z_index = -1
@@ -240,7 +240,7 @@ texture = ExtResource("1_1xdio")
 physics_layer_0/collision_layer = 1
 physics_layer_1/collision_layer = 2
 physics_layer_1/collision_mask = 2
-sources/0 = SubResource("TileSetAtlasSource_wbswo")
+sources/0 = SubResource("TileSetAtlasSource_l16ne")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4ase6"]
 normal = Vector2(1, 0)
