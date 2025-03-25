@@ -338,13 +338,14 @@ text = "Score: 000"
 script = ExtResource("11_7sft5")
 
 [node name="pCam" type="Camera2D" parent="Player"]
-visible = false
 zoom = Vector2(1.5, 1.5)
 limit_left = 0
 limit_top = 0
+limit_right = 2981
 limit_bottom = 880
 
 [node name="robotEnemy" parent="." instance=ExtResource("8_60fa1")]
+visible = false
 position = Vector2(-199, -247)
 
 [node name="Movingplatform 1" parent="." instance=ExtResource("10_wpuku")]
@@ -369,9 +370,11 @@ position = Vector2(1494, -443)
 position = Vector2(1270, -443)
 
 [node name="turrentEnemy" parent="." instance=ExtResource("12_bnnr7")]
+visible = false
 position = Vector2(23, 12)
 
 [node name="botEnemy" parent="." instance=ExtResource("12_4i8rg")]
+visible = false
 position = Vector2(677, 0)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
