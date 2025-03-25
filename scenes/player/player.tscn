@@ -1,7 +1,8 @@
-[gd_scene load_steps=40 format=3 uid="uid://dvpv2itrthwxn"]
+[gd_scene load_steps=43 format=3 uid="uid://dvpv2itrthwxn"]
 
 [ext_resource type="Texture2D" uid="uid://dq30xdp13brlq" path="res://assets/warped city files/SPRITES/player/shoot/shoot.png" id="1_6rxl6"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_07jxr"]
+[ext_resource type="Shader" path="res://scenes/player/player.gdshader" id="1_i3xj8"]
 [ext_resource type="Texture2D" uid="uid://bbm43w31m037j" path="res://assets/warped city files/SPRITES/player/climb/climb-1.png" id="2_8x1tm"]
 [ext_resource type="Texture2D" uid="uid://d31curb8lhyce" path="res://assets/warped city files/SPRITES/player/idle/idle-1.png" id="2_mo1kp"]
 [ext_resource type="Texture2D" uid="uid://ckle80eeufcy1" path="res://assets/warped city files/SPRITES/player/crouch/crouch.png" id="2_xqsgy"]
@@ -37,9 +38,19 @@
 [ext_resource type="Texture2D" uid="uid://cxdf03k1rww8w" path="res://assets/sprites/13.png" id="27_eo55x"]
 [ext_resource type="PackedScene" uid="uid://c2g4ddtwrw3i2" path="res://scenes/UI/HealthBar.tscn" id="36_3c2uc"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2bcn0"]
+shader = ExtResource("1_i3xj8")
+shader_parameter/flash_color = null
+shader_parameter/flash_value = null
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pl2to"]
 radius = 6.0
 height = 44.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_18eu2"]
+shader = ExtResource("1_i3xj8")
+shader_parameter/flash_color = null
+shader_parameter/flash_value = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vl02s"]
 animations = [{
@@ -195,6 +206,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
+material = SubResource("ShaderMaterial_2bcn0")
 platform_floor_layers = 4278190081
 script = ExtResource("1_07jxr")
 
@@ -203,6 +215,7 @@ position = Vector2(3, 9)
 shape = SubResource("CapsuleShape2D_pl2to")
 
 [node name="playerSprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_18eu2")
 sprite_frames = SubResource("SpriteFrames_vl02s")
 animation = &"idle"
 
@@ -222,6 +235,14 @@ collision_mask = 2
 collide_with_areas = true
 
 [node name="HealthBar" parent="." instance=ExtResource("36_3c2uc")]
+offset_left = -336.0
+offset_top = -91.0
+offset_right = -335.0
+offset_bottom = -91.0
+scale = Vector2(2.5, 2.5)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="ladderCheckerRay" type="RayCast2D" parent="."]
 position = Vector2(0, 1)

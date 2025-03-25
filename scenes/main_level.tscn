@@ -326,23 +326,24 @@ tile_set = SubResource("TileSet_cefyh")
 position = Vector2(1737, -355)
 floor_block_on_wall = false
 
-[node name="scoreLabel" type="StaticBody2D" parent="Player"]
-position = Vector2(-74, 338)
-
-[node name="currentscoreLabel" type="RichTextLabel" parent="Player/scoreLabel"]
-offset_left = 44.0
-offset_top = -413.0
-offset_right = 175.0
-offset_bottom = -373.0
-text = "Score: 000"
-script = ExtResource("11_7sft5")
-
 [node name="pCam" type="Camera2D" parent="Player"]
 zoom = Vector2(1.5, 1.5)
 limit_left = 0
 limit_top = 0
 limit_right = 2981
 limit_bottom = 880
+position_smoothing_speed = 15.0
+
+[node name="scoreLabel" type="StaticBody2D" parent="Player"]
+position = Vector2(-74, 338)
+
+[node name="currentscoreLabel" type="RichTextLabel" parent="Player/scoreLabel"]
+offset_left = -336.0
+offset_top = -517.0
+offset_right = -205.0
+offset_bottom = -477.0
+text = "Score: 0"
+script = ExtResource("11_7sft5")
 
 [node name="robotEnemy" parent="." instance=ExtResource("8_60fa1")]
 visible = false
