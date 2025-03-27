@@ -15,6 +15,13 @@ const FRICTION = 900
 const CLIMB_SPEED = 100
 var health = 100
 
+# Preload the bullet scene
+var BulletScene = preload("res://scenes/player/bullet.tscn")
+
+# Cooldown settings
+const COOLDOWN_TIME := 0.5
+var time_since_last_shot := 0.0
+
 var platform_velocity = Vector2.ZERO
 var on_moving_platform = false
 var current_platform = null
@@ -29,6 +36,11 @@ func _physics_process(delta):
 	if global_position.y > 1040 and not is_on_floor():
 		get_tree().reload_current_scene()
 	
+	time_since_last_shot += delta
+	if Input.is_action_pressed("shoot") and time_since_last_shot >= COOLDOWN_TIME:
+		shoot()
+		time_since_last_shot = 0
+
 	#Ensure only ladders trigger climbing mode
 	var ladder_check_collider = ladder_checker_ray.get_collider()
 	var ladder_collider = ladder_ray.get_collider()
@@ -161,8 +173,15 @@ func handle_animation(horizontal_move: float):
 
 func shoot():
 	var new_bullet = BULLET.instantiate()
-	new_bullet.dir = -1 if player_sprite.flip_h else 1
+	#new_bullet.dir = -1 if player_sprite.flip_h else 1
 	new_bullet.spawnPos = bullet_start.global_position
+	# Get the global mouse position and calculate direction
+	var mouse_pos = get_global_mouse_position()
+	var direction = (mouse_pos - new_bullet.spawnPos).normalized()
+	 # Optionally, rotate the bullet to face the direction it is moving
+	new_bullet.rotation = direction.angle()
+	# Pass the direction to the bullet (using a custom method defined in bullet.gd)
+	new_bullet.set_direction(direction)
 	get_tree().root.add_child(new_bullet)
 
 func hit(direction):
