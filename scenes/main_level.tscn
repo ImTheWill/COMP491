@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://cd4tm0rkq5ys4"]
+[gd_scene load_steps=27 format=4 uid="uid://cd4tm0rkq5ys4"]
 
 [ext_resource type="Texture2D" uid="uid://d37hh44ma2yu1" path="res://assets/warped city files/ENVIRONMENT/tileset.png" id="1_1xdio"]
 [ext_resource type="Script" path="res://scripts/main_level.gd" id="1_515pj"]
@@ -18,6 +18,9 @@
 [ext_resource type="PackedScene" uid="uid://dciiyt3nonml1" path="res://scenes/platforms/Platform3.tscn" id="15_2avj7"]
 [ext_resource type="PackedScene" uid="uid://dqi883p6rrh54" path="res://scenes/platforms/Platform6.tscn" id="15_lfa3d"]
 [ext_resource type="PackedScene" uid="uid://cc2q4ajap1nf" path="res://scenes/enemies/bossEnemy.tscn" id="18_vyt7q"]
+[ext_resource type="PackedScene" uid="uid://bw5x5gcjj2l2w" path="res://scenes/Achievement System/Achievement.tscn" id="19_j1olr"]
+[ext_resource type="Script" path="res://scripts/AchievementSystem.gd" id="20_8jw45"]
+[ext_resource type="PackedScene" uid="uid://cjoqoj0f43ku4" path="res://scenes/UI/ResultScreen.tscn" id="21_56cqh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l16ne"]
 texture = ExtResource("1_1xdio")
@@ -398,6 +401,16 @@ position = Vector2(1877, -402)
 visible = false
 position = Vector2(69, -28)
 shape = SubResource("RectangleShape2D_kd277")
+
+[node name="AchievementSystem" parent="." instance=ExtResource("19_j1olr")]
+script = ExtResource("20_8jw45")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ResultScreen" parent="CanvasLayer" instance=ExtResource("21_56cqh")]
+visible = true
+offset_top = 0.0
+offset_bottom = 720.0
 
 [connection signal="body_entered" from="BossDetectionArea" to="bossEnemy" method="_on_boss_detection_area_body_entered"]
 [connection signal="body_exited" from="BossDetectionArea" to="bossEnemy" method="_on_boss_detection_area_body_exited"]

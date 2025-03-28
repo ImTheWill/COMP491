@@ -1,4 +1,6 @@
 extends CharacterBody2D
+signal boss_defeated
+
 
 @onready var boss_health_bar = $bossHealthBar
 @onready var boss_sprite = $bossSprite
@@ -13,6 +15,7 @@ var player = null
 var initial_position = Vector2()
 var attack_range = 50
 var returning = false  # Whether the boss is returning to its position
+var is_defeated = false
 
 func _ready():
 	boss_sprite.play("idle")
@@ -21,7 +24,12 @@ func _ready():
 
 func _physics_process(delta):
 	# If boss dies, play death animation and add points
-	if health <= 0:
+	if health <= 0 and not is_defeated:
+		
+		is_defeated = true 
+		#Emit the signal
+		emit_signal("boss_defeated")
+		
 		boss_sprite.play("death")
 		await get_tree().create_timer(3.5).timeout
 		Global.score += points_per_kill
