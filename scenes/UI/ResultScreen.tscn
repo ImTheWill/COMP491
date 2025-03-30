@@ -1,9 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjoqoj0f43ku4"]
+[gd_scene load_steps=4 format=3 uid="uid://cjoqoj0f43ku4"]
 
 [ext_resource type="Script" path="res://scripts/result_screen.gd" id="1_q7cjx"]
+[ext_resource type="FontFile" uid="uid://bm22e4yafek3d" path="res://assets/fonts/Minecraft.ttf" id="2_7pbr7"]
+[ext_resource type="Texture2D" uid="uid://c6u3gj8nu0yvx" path="res://assets/Achievement UI/2.png" id="2_bi0js"]
 
 [node name="ResultScreen" type="Control"]
-visible = false
 z_index = 1000
 custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
@@ -29,11 +30,12 @@ grow_horizontal = 2
 [node name="Wintext" type="Label" parent="Panel/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_7pbr7")
 theme_override_font_sizes/font_size = 100
 text = "\" YOU WIN ! \""
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-custom_minimum_size = Vector2(1280, 720)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 0
 offset_left = 2.0
 offset_right = 1282.0
@@ -41,10 +43,18 @@ offset_bottom = 720.0
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="AchievementText" type="Label" parent="Panel/VBoxContainer"]
-custom_minimum_size = Vector2(1280, 0)
+[node name="AchievementRow1" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
-text = "
-"
-horizontal_alignment = 1
-vertical_alignment = 1
+alignment = 1
+
+[node name="AchievementText" type="Label" parent="Panel/VBoxContainer/AchievementRow1"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7pbr7")
+theme_override_font_sizes/font_size = 20
+
+[node name="StarImage" type="TextureRect" parent="Panel/VBoxContainer/AchievementRow1"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_bi0js")
+expand_mode = 1
+stretch_mode = 5
