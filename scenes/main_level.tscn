@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://cd4tm0rkq5ys4"]
+[gd_scene load_steps=28 format=4 uid="uid://cd4tm0rkq5ys4"]
 
 [ext_resource type="Texture2D" uid="uid://d37hh44ma2yu1" path="res://assets/warped city files/ENVIRONMENT/tileset.png" id="1_1xdio"]
 [ext_resource type="Script" path="res://scripts/main_level.gd" id="1_515pj"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cqkcxtbgfljvn" path="res://assets/Sunset/far-buildings.png" id="6_inpae"]
 [ext_resource type="Texture2D" uid="uid://7a1c7r16ds07" path="res://assets/Sunset/near-buildings.png" id="7_xk3jm"]
 [ext_resource type="PackedScene" uid="uid://dgay74lfvj03a" path="res://scenes/enemies/robotEnemy.tscn" id="8_60fa1"]
+[ext_resource type="PackedScene" uid="uid://c2g4ddtwrw3i2" path="res://scenes/UI/HealthBar.tscn" id="9_nkt00"]
 [ext_resource type="PackedScene" uid="uid://bka2pph1p0h4q" path="res://scenes/platforms/Platform1.tscn" id="10_wpuku"]
 [ext_resource type="Script" path="res://scripts/currentscore_label.gd" id="11_7sft5"]
 [ext_resource type="PackedScene" uid="uid://dbmjwrfpbhou1" path="res://scenes/enemies/botEnemy.tscn" id="12_4i8rg"]
@@ -265,7 +266,7 @@ motion_scale = Vector2(0.5, 0.5)
 motion_mirroring = Vector2(1480, 0)
 
 [node name="skySprite" type="Sprite2D" parent="ParallaxBackground/sky"]
-position = Vector2(190, 418)
+position = Vector2(188, 418)
 scale = Vector2(4.7, 3.48333)
 texture = ExtResource("4_enklt")
 
@@ -326,11 +327,11 @@ tile_map_data = PackedByteArray("AADn/wIAAAAHAAsAAADo/wIAAAAHAAsAAADp/wIAAAAHAAs
 tile_set = SubResource("TileSet_cefyh")
 
 [node name="Player" parent="." instance=ExtResource("2_li2ec")]
-position = Vector2(-372, -244)
+position = Vector2(-387, -242)
 floor_block_on_wall = false
 
 [node name="pCam" type="Camera2D" parent="Player"]
-visible = false
+position = Vector2(0, -3)
 zoom = Vector2(1.5, 1.5)
 limit_left = 0
 limit_top = 0
@@ -338,16 +339,27 @@ limit_right = 2981
 limit_bottom = 880
 position_smoothing_speed = 15.0
 
-[node name="scoreLabel" type="StaticBody2D" parent="Player"]
-position = Vector2(-25, 299)
+[node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="currentscoreLabel" type="RichTextLabel" parent="Player/scoreLabel"]
-offset_left = -5.0
-offset_top = -645.0
-offset_right = 126.0
-offset_bottom = -605.0
+[node name="scoreLabel" type="StaticBody2D" parent="UILayer"]
+position = Vector2(15, 254)
+
+[node name="currentscoreLabel" type="RichTextLabel" parent="UILayer/scoreLabel"]
+offset_left = 2.0
+offset_top = -56.0
+offset_right = 133.0
+offset_bottom = -16.0
 text = "Score: 0"
 script = ExtResource("11_7sft5")
+
+[node name="HealthBar" parent="UILayer" instance=ExtResource("9_nkt00")]
+anchors_preset = 0
+offset_left = 2.0
+offset_top = 175.0
+offset_right = 202.0
+offset_bottom = 205.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="robotEnemy" parent="." instance=ExtResource("8_60fa1")]
 position = Vector2(-199, -247)
@@ -404,6 +416,7 @@ shape = SubResource("RectangleShape2D_kd277")
 script = ExtResource("20_8jw45")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ResultScreen" parent="CanvasLayer" instance=ExtResource("21_56cqh")]
 offset_top = 0.0

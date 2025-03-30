@@ -10,6 +10,9 @@ extends Node2D
 func _ready():
 
 	result_screen.visible = false
+	
+	$Player.player_health_bar = $CanvasLayer/HealthBar
+	
 	boss.boss_defeated.connect(_on_boss_defeated)
 
 func _on_boss_defeated():

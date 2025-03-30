@@ -5,8 +5,8 @@ extends CharacterBody2D
 @onready var BULLET = load("res://scenes/player/bullet.tscn")
 @onready var bullet_start = $bulletStart
 @onready var ladder_ray = $ladderRay
-@onready var player_health_bar = $HealthBar
 @onready var ladder_checker_ray = $ladderCheckerRay
+@onready var player_health_bar = $HealthBar
 
 const MAX_SPEED = 200
 const ACCELERATION = 1000
