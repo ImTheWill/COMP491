@@ -164,7 +164,6 @@ func shoot():
 	new_bullet.dir = -1 if player_sprite.flip_h else 1
 	new_bullet.spawnPos = bullet_start.global_position
 	get_tree().root.add_child(new_bullet)
-
 func hit(direction):
 #	velocity.x += 300 * direction
 	move_and_slide()

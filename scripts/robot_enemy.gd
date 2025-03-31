@@ -1,4 +1,6 @@
 extends CharacterBody2D
+signal enemy_defeated
+
 @onready var robot_ray = $robotRay
 @onready var robot_anim_sprite = $robotAnimSprite
 @onready var enemy_health_bar = $EnemyHealthBar
@@ -16,6 +18,7 @@ func _physics_process(delta):
 	if(health<=0):
 		robot_anim_sprite.play("death")
 		await get_tree().create_timer(.5).timeout
+		emit_signal("enemy_defeated")
 		Global.score += points_per_kill
 		queue_free()
 	if not is_on_floor():

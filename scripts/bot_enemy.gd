@@ -1,4 +1,6 @@
 extends CharacterBody2D
+signal enemy_defeated
+
 @onready var bot_player_ray = $botPlayerRay
 @onready var bot_floor_ray = $botFloorRay
 @onready var enemy_health_bar = $EnemyHealthBar
@@ -15,12 +17,14 @@ var points_per_kill = 100
 func _ready():
 	bot_sprite.play("patrol")
 	add_to_group("Enemy")
+	
 func _physics_process(delta):
 	var botPlayerRay = bot_player_ray.get_collider()
 	
 	if(health<=0):
 		bot_sprite.play("death")
 		await get_tree().create_timer(.5).timeout
+		emit_signal("enemy_defeated")
 		Global.score += points_per_kill
 		queue_free()
 	#print(timer.is_stopped())

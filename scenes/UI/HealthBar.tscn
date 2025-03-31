@@ -52,6 +52,7 @@ corner_radius_bottom_left = 5
 [node name="HealthBar" type="Control"]
 custom_minimum_size = Vector2(100, 20)
 layout_mode = 3
+anchors_preset = 0
 offset_left = 22.0
 offset_top = 9.0
 offset_right = 122.0

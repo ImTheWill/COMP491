@@ -1,4 +1,7 @@
 extends CharacterBody2D
+signal enemy_defeated
+
+
 @onready var turrent_ray_front = $turrentRayFront
 @onready var turrent_ray_back  = $turrentRayBack
 @onready var turrent_sprite = $turrentSprite
@@ -16,6 +19,7 @@ var points_per_kill = 100
 
 func _ready():
 	add_to_group("Enemy")
+	
 func _physics_process(_delta):
 	#colliders to detect player
 	var turrColliderFront = turrent_ray_front.get_collider()
@@ -25,6 +29,7 @@ func _physics_process(_delta):
 	if(health<=0):
 		turrent_sprite.play("death")
 		await get_tree().create_timer(.5).timeout
+		emit_signal("enemy_defeated")
 		Global.score += points_per_kill
 		queue_free()
 		

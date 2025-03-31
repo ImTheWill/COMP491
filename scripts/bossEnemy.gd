@@ -1,5 +1,6 @@
 extends CharacterBody2D
 signal boss_defeated
+signal enemy_defeated 
 
 
 @onready var boss_health_bar = $bossHealthBar
@@ -29,6 +30,7 @@ func _physics_process(delta):
 		is_defeated = true 
 		#Emit the signal
 		emit_signal("boss_defeated")
+		emit_signal("enemy_defeated")
 		
 		boss_sprite.play("death")
 		await get_tree().create_timer(3.5).timeout

@@ -353,7 +353,6 @@ text = "Score: 0"
 script = ExtResource("11_7sft5")
 
 [node name="HealthBar" parent="UILayer" instance=ExtResource("9_nkt00")]
-anchors_preset = 0
 offset_left = 2.0
 offset_top = 175.0
 offset_right = 202.0
@@ -386,7 +385,7 @@ position = Vector2(1494, -443)
 position = Vector2(1270, -443)
 
 [node name="turrentEnemy" parent="." instance=ExtResource("12_bnnr7")]
-position = Vector2(23, 12)
+position = Vector2(922, -146)
 
 [node name="botEnemy" parent="." instance=ExtResource("12_4i8rg")]
 position = Vector2(677, 0)
@@ -416,7 +415,6 @@ shape = SubResource("RectangleShape2D_kd277")
 script = ExtResource("20_8jw45")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="ResultScreen" parent="CanvasLayer" instance=ExtResource("21_56cqh")]
 offset_top = 0.0

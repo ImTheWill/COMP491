@@ -58,3 +58,33 @@ layout_mode = 2
 texture = ExtResource("2_bi0js")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="AchievementRow2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="AchievementText2" type="Label" parent="Panel/VBoxContainer/AchievementRow2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7pbr7")
+theme_override_font_sizes/font_size = 20
+
+[node name="StarImage1" type="TextureRect" parent="Panel/VBoxContainer/AchievementRow2"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_bi0js")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StarImage2" type="TextureRect" parent="Panel/VBoxContainer/AchievementRow2"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_bi0js")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StarImage3" type="TextureRect" parent="Panel/VBoxContainer/AchievementRow2"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_bi0js")
+expand_mode = 1
+stretch_mode = 5
