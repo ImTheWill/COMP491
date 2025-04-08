@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Inv" load_steps=4 format=3 uid="uid://cdxrpjqjsa4x8"]
+
+[ext_resource type="Script" path="res://inventory/inventory_item.gd" id="1_vfglt"]
+[ext_resource type="Resource" uid="uid://bl8ipv5epmkvf" path="res://inventory/items/medkit.tres" id="2_y3538"]
+[ext_resource type="Script" path="res://inventory/inventory.gd" id="3_srjsn"]
+
+[resource]
+script = ExtResource("3_srjsn")
+items = Array[ExtResource("1_vfglt")]([null, null, ExtResource("2_y3538"), null, null, null, ExtResource("2_y3538"), null, null, null, null, null])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dvpv2itrthwxn"]
+[gd_scene load_steps=44 format=3 uid="uid://dvpv2itrthwxn"]
 
 [ext_resource type="Texture2D" uid="uid://dq30xdp13brlq" path="res://assets/warped city files/SPRITES/player/shoot/shoot.png" id="1_6rxl6"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_07jxr"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d31curb8lhyce" path="res://assets/warped city files/SPRITES/player/idle/idle-1.png" id="2_mo1kp"]
 [ext_resource type="Texture2D" uid="uid://ckle80eeufcy1" path="res://assets/warped city files/SPRITES/player/crouch/crouch.png" id="2_xqsgy"]
 [ext_resource type="Texture2D" uid="uid://dpgjm3pkedeni" path="res://assets/warped city files/SPRITES/player/idle/idle-2.png" id="3_0a5da"]
+[ext_resource type="Resource" uid="uid://cdxrpjqjsa4x8" path="res://inventory/playerinv.tres" id="3_bhwkx"]
 [ext_resource type="Texture2D" uid="uid://dt45i81vw828m" path="res://assets/warped city files/SPRITES/player/climb/climb-2.png" id="3_ohs8k"]
 [ext_resource type="Texture2D" uid="uid://cdevtacv2ih" path="res://assets/warped city files/SPRITES/player/idle/idle-3.png" id="4_4uv0p"]
 [ext_resource type="Texture2D" uid="uid://cqtjpcxhyd2h2" path="res://assets/warped city files/SPRITES/player/climb/climb-3.png" id="4_48iom"]
@@ -36,6 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://dv02f4myenriv" path="res://assets/warped city files/SPRITES/player/run-shoot/run-shoot-8.png" id="17_01is3"]
 [ext_resource type="Texture2D" uid="uid://dpo5femtl3jyv" path="res://assets/warped city files/SPRITES/player/run/run-8.png" id="18_rs0ir"]
 [ext_resource type="Texture2D" uid="uid://cxdf03k1rww8w" path="res://assets/sprites/13.png" id="27_eo55x"]
+[ext_resource type="PackedScene" uid="uid://cqf45xqdf6hl6" path="res://inventory/inv_ui.tscn" id="38_fp10n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2bcn0"]
 shader = ExtResource("1_i3xj8")
@@ -208,6 +210,7 @@ animations = [{
 material = SubResource("ShaderMaterial_2bcn0")
 platform_floor_layers = 4278190081
 script = ExtResource("1_07jxr")
+inv = ExtResource("3_bhwkx")
 
 [node name="playerCollision" type="CollisionShape2D" parent="."]
 position = Vector2(3, 9)
@@ -238,3 +241,10 @@ position = Vector2(0, 1)
 target_position = Vector2(0, -26)
 collision_mask = 2
 collide_with_areas = true
+
+[node name="Inv_UI" parent="." instance=ExtResource("38_fp10n")]
+visible = false
+offset_left = -92.0
+offset_top = -173.0
+offset_right = 113.0
+offset_bottom = -173.0

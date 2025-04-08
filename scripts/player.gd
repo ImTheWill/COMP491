@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var ladder_ray = $ladderRay
 @onready var ladder_checker_ray = $ladderCheckerRay
 @onready var player_health_bar = $HealthBar
-
+@export var inv: Inv 
 const MAX_SPEED = 200
 const ACCELERATION = 1000
 const JUMP_FORCE = -400
