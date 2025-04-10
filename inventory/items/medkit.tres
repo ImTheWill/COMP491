@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://bl8ipv5epmkvf"]
 
-[ext_resource type="Script" path="res://inventory/inventory_item.gd" id="1_8ckaa"]
-[ext_resource type="Texture2D" uid="uid://bjw4exqk2ul4m" path="res://assets/sprites/Screenshot 2025-04-07 at 5.32.59 PM.png" id="2_4bdyc"]
+[ext_resource type="Script" path="res://inventory/inventory_item.gd" id="1_wue5j"]
+[ext_resource type="Texture2D" uid="uid://bjw4exqk2ul4m" path="res://assets/sprites/Screenshot 2025-04-07 at 5.32.59 PM.png" id="2_hk5c7"]
 
 [resource]
-script = ExtResource("1_8ckaa")
-name = "healthicon"
-texture = ExtResource("2_4bdyc")
+script = ExtResource("1_wue5j")
+name = "medkit"
+texture = ExtResource("2_hk5c7")

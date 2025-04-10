@@ -159,6 +159,12 @@ func handle_animation(horizontal_move: float):
 	else:
 		player_sprite.play("jump")
 
+func collect(item):
+	inv.insert(item) 
+
+func player():
+	pass
+
 func shoot():
 	var new_bullet = BULLET.instantiate()
 	new_bullet.dir = -1 if player_sprite.flip_h else 1

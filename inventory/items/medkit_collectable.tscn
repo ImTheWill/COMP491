@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://clhn4gbtg0bmb"]
+
+[ext_resource type="Script" path="res://medkit_collectable.gd" id="1_lk6xj"]
+[ext_resource type="Resource" uid="uid://bl8ipv5epmkvf" path="res://inventory/items/medkit.tres" id="2_uaoc6"]
+[ext_resource type="Texture2D" uid="uid://bjw4exqk2ul4m" path="res://assets/sprites/Screenshot 2025-04-07 at 5.32.59 PM.png" id="3_5ekcy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7l67s"]
+size = Vector2(54, 43)
+
+[node name="medkit_collectable" type="StaticBody2D"]
+script = ExtResource("1_lk6xj")
+item = ExtResource("2_uaoc6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_5ekcy")
+
+[node name="interactable_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactable_area"]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_7l67s")
+
+[connection signal="body_entered" from="interactable_area" to="." method="_on_interactable_area_body_entered"]
