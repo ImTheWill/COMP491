@@ -25,13 +25,16 @@ max_contacts_reported = 200
 script = ExtResource("1_roxnh")
 
 [node name="collisionBullet" type="CollisionShape2D" parent="."]
-position = Vector2(6, 0)
+position = Vector2(6.1, -0.0560007)
 rotation = 1.5708
 scale = Vector2(0.2, 0.152)
 shape = SubResource("CapsuleShape2D_a0nsi")
+metadata/_edit_group_ = true
 
 [node name="bulletSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0.1, -0.0560007)
 scale = Vector2(0.2, 0.152)
 sprite_frames = SubResource("SpriteFrames_617mb")
+metadata/_edit_group_ = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
