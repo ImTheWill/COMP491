@@ -251,3 +251,9 @@ position = Vector2(0, 1)
 target_position = Vector2(0, -26)
 collision_mask = 2
 collide_with_areas = true
+
+[node name="cooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]
