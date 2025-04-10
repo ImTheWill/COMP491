@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://cd4tm0rkq5ys4"]
+[gd_scene load_steps=30 format=4 uid="uid://cd4tm0rkq5ys4"]
 
 [ext_resource type="Texture2D" uid="uid://d37hh44ma2yu1" path="res://assets/warped city files/ENVIRONMENT/tileset.png" id="1_1xdio"]
 [ext_resource type="Script" path="res://scripts/main_level.gd" id="1_515pj"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://scripts/AchievementSystem.gd" id="20_8jw45"]
 [ext_resource type="PackedScene" uid="uid://cjoqoj0f43ku4" path="res://scenes/UI/ResultScreen.tscn" id="21_56cqh"]
 [ext_resource type="PackedScene" uid="uid://clhn4gbtg0bmb" path="res://inventory/items/medkit_collectable.tscn" id="23_revib"]
+[ext_resource type="PackedScene" uid="uid://bad1m37i5ekb2" path="res://inventory/items/bullet_collectable.tscn" id="24_u83xl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l16ne"]
 texture = ExtResource("1_1xdio")
@@ -428,6 +429,12 @@ position = Vector2(1119, -215)
 
 [node name="medkit_collectable2" parent="." instance=ExtResource("23_revib")]
 position = Vector2(1538, 1)
+
+[node name="bulltet_collectable2" parent="." instance=ExtResource("24_u83xl")]
+position = Vector2(1357, 7)
+
+[node name="bulltet_collectable" parent="." instance=ExtResource("24_u83xl")]
+position = Vector2(1758, -21)
 
 [connection signal="body_entered" from="BossDetectionArea" to="bossEnemy" method="_on_boss_detection_area_body_entered"]
 [connection signal="body_exited" from="BossDetectionArea" to="bossEnemy" method="_on_boss_detection_area_body_exited"]

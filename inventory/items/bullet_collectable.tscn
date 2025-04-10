@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bad1m37i5ekb2"]
+
+[ext_resource type="Script" path="res://static_body_2d.gd" id="1_t1cem"]
+[ext_resource type="Resource" uid="uid://dg12kyur3etas" path="res://inventory/items/stick.tres" id="2_3cisb"]
+[ext_resource type="Texture2D" uid="uid://cxdf03k1rww8w" path="res://assets/sprites/13.png" id="2_dpoq5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_db6i3"]
+radius = 15.0333
+
+[node name="bulltet_collectable" type="StaticBody2D"]
+script = ExtResource("1_t1cem")
+item = ExtResource("2_3cisb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.531251, 0.249997)
+scale = Vector2(0.123755, 0.135417)
+texture = ExtResource("2_dpoq5")
+
+[node name="interactable_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactable_area"]
+shape = SubResource("CircleShape2D_db6i3")
+
+[connection signal="body_entered" from="interactable_area" to="." method="_on_interactable_area_body_entered"]
+[connection signal="body_entered" from="interactable_area" to="." method="_on_area_2d_body_entered"]
