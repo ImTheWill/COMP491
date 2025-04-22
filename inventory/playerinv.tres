@@ -5,51 +5,51 @@
 
 [sub_resource type="Resource" id="Resource_kjl6q"]
 script = ExtResource("2_mgwt2")
-ammount = 0
+amount = 0
 
 [sub_resource type="Resource" id="Resource_m77my"]
 script = ExtResource("2_mgwt2")
-ammount = 0
+amount = 0
 
 [sub_resource type="Resource" id="Resource_a5vcb"]
 script = ExtResource("2_mgwt2")
-ammount = 0
+amount = 0
 
 [sub_resource type="Resource" id="Resource_eur51"]
 script = ExtResource("2_mgwt2")
-ammount = 0
+amount = 0
 
 [sub_resource type="Resource" id="Resource_hdtfq"]
 script = ExtResource("2_mgwt2")
-ammount = 0
+amount = 0
 
 [sub_resource type="Resource" id="Resource_onf5w"]
 script = ExtResource("2_mgwt2")
-ammount = 0
+amount = 0
 
 [sub_resource type="Resource" id="Resource_rrwnw"]
 script = ExtResource("2_mgwt2")
-ammount = 0
+amount = 0
 
 [sub_resource type="Resource" id="Resource_8ipet"]
 script = ExtResource("2_mgwt2")
-ammount = 0
+amount = 0
 
 [sub_resource type="Resource" id="Resource_gej5n"]
 script = ExtResource("2_mgwt2")
-ammount = 0
+amount = 0
 
 [sub_resource type="Resource" id="Resource_umkcf"]
 script = ExtResource("2_mgwt2")
-ammount = 0
+amount = 0
 
 [sub_resource type="Resource" id="Resource_bqi8t"]
 script = ExtResource("2_mgwt2")
-ammount = 0
+amount = 0
 
 [sub_resource type="Resource" id="Resource_36wym"]
 script = ExtResource("2_mgwt2")
-ammount = 0
+amount = 0
 
 [resource]
 script = ExtResource("3_srjsn")

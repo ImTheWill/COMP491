@@ -8,6 +8,7 @@ var speed = 1000
 
 #work on collison
 func _ready():
+	add_to_group("Bullet")
 	position = spawnPos
 	scale.x = scale.x*dir
 	linear_velocity.x = speed * dir

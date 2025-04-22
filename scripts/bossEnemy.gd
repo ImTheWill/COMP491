@@ -64,7 +64,7 @@ func _physics_process(delta):
 
 
 
-func move_towards(target, delta):
+func move_towards(target, _delta):
 	var direction = (target - global_position).normalized()
 	direction.y = 0  # Prevent movement on the Y-axis
 	

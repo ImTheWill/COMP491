@@ -19,6 +19,7 @@ animations = [{
 }]
 
 [node name="bullet" type="RigidBody2D"]
+collision_mask = 5
 gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 200

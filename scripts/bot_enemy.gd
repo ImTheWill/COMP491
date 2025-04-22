@@ -8,6 +8,7 @@ signal enemy_defeated
 @onready var bot_sprite = $botSprite
 @onready var timer = $Timer
 @onready var BULLET = load("res://scenes/player/bullet.tscn")
+@onready var area2d = $Area2D
 
 var speed = 60
 var facing_right = false
@@ -20,7 +21,8 @@ func _ready():
 	
 func _physics_process(delta):
 	var botPlayerRay = bot_player_ray.get_collider()
-	
+
+		
 	if(health<=0):
 		bot_sprite.play("death")
 		await get_tree().create_timer(.5).timeout
@@ -29,7 +31,11 @@ func _physics_process(delta):
 		queue_free()
 	#print(timer.is_stopped())
 	if botPlayerRay && timer.is_stopped():
-		shoot()
+		if(botPlayerRay!=null):
+			if botPlayerRay.is_in_group("Player"):
+				shoot()
+			elif botPlayerRay.is_in_group("Enemy"):
+				set_collision_mask_value(1,false)
 	if not is_on_floor():
 		velocity.y += get_gravity().y *delta
 	if !bot_floor_ray.is_colliding() && is_on_floor():
@@ -37,6 +43,7 @@ func _physics_process(delta):
 		
 	velocity.x = speed
 	move_and_slide()
+
 
 
 func flip():

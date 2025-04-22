@@ -1,8 +1,14 @@
-[gd_scene load_steps=6 format=4 uid="uid://glijkqk7wpu1"]
+[gd_scene load_steps=12 format=4 uid="uid://glijkqk7wpu1"]
 
 [ext_resource type="Texture2D" uid="uid://d37hh44ma2yu1" path="res://assets/warped city files/ENVIRONMENT/tileset.png" id="1_28067"]
 [ext_resource type="Script" path="res://scripts/endless.gd" id="1_x0b4o"]
+[ext_resource type="PackedScene" uid="uid://dbmjwrfpbhou1" path="res://scenes/enemies/botEnemy.tscn" id="2_fcc1e"]
 [ext_resource type="PackedScene" uid="uid://dvpv2itrthwxn" path="res://scenes/player/player.tscn" id="3_crnsi"]
+[ext_resource type="PackedScene" uid="uid://7ogrpfxvp8by" path="res://scenes/enemies/turrent_enemy.tscn" id="3_dxgva"]
+[ext_resource type="Texture2D" uid="uid://jqacvkism4ti" path="res://assets/warped city files/ENVIRONMENT/background/skyline-a.png" id="4_uumwa"]
+[ext_resource type="Texture2D" uid="uid://c0ddwf8talk5j" path="res://assets/Sunset/sun.png" id="5_e4b2m"]
+[ext_resource type="Texture2D" uid="uid://cqkcxtbgfljvn" path="res://assets/Sunset/far-buildings.png" id="6_rkhxy"]
+[ext_resource type="Texture2D" uid="uid://7a1c7r16ds07" path="res://assets/Sunset/near-buildings.png" id="7_ee1ef"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wnmor"]
 texture = ExtResource("1_28067")
@@ -222,13 +228,74 @@ texture = ExtResource("1_28067")
 16:14/0/z_index = -1
 
 [sub_resource type="TileSet" id="TileSet_cere6"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 5
+physics_layer_0/collision_mask = 5
 physics_layer_1/collision_layer = 2
 physics_layer_1/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_wnmor")
 
 [node name="Endless" type="Node2D"]
+position = Vector2(0, -6)
 script = ExtResource("1_x0b4o")
+shooter = ExtResource("2_fcc1e")
+turrent = ExtResource("3_dxgva")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="sky" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1802, 0)
+
+[node name="skySprite" type="Sprite2D" parent="ParallaxBackground/sky"]
+position = Vector2(296, 417)
+scale = Vector2(4.7, 3.48333)
+texture = ExtResource("4_uumwa")
+
+[node name="skySprite2" type="Sprite2D" parent="ParallaxBackground/sky"]
+position = Vector2(897, 420)
+scale = Vector2(4.7, 3.48333)
+texture = ExtResource("4_uumwa")
+
+[node name="skySprite3" type="Sprite2D" parent="ParallaxBackground/sky"]
+position = Vector2(1497, 420)
+scale = Vector2(4.7, 3.48333)
+texture = ExtResource("4_uumwa")
+
+[node name="sun" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(1480, 0)
+
+[node name="sunSprite" type="Sprite2D" parent="ParallaxBackground/sun"]
+position = Vector2(748, 458)
+scale = Vector2(4.452, 4)
+texture = ExtResource("5_e4b2m")
+
+[node name="building1" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.8, 0.8)
+motion_mirroring = Vector2(1480, 0)
+
+[node name="B1Sprite" type="Sprite2D" parent="ParallaxBackground/building1"]
+position = Vector2(266.406, 424)
+scale = Vector2(3.64714, 3.48333)
+texture = ExtResource("6_rkhxy")
+
+[node name="B1Sprite2" type="Sprite2D" parent="ParallaxBackground/building1"]
+position = Vector2(1291, 425)
+scale = Vector2(3.06944, 3.48333)
+texture = ExtResource("6_rkhxy")
+
+[node name="B1Sprite3" type="Sprite2D" parent="ParallaxBackground/building1"]
+position = Vector2(804, 421)
+scale = Vector2(3.81944, 3.48333)
+texture = ExtResource("6_rkhxy")
+
+[node name="building2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1480, 0)
+
+[node name="B2Sprite" type="Sprite2D" parent="ParallaxBackground/building2"]
+position = Vector2(758, 447)
+scale = Vector2(3.775, 3.675)
+texture = ExtResource("7_ee1ef")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(1, 0)
@@ -236,6 +303,13 @@ tile_map_data = PackedByteArray("AACgAN3/AAAIAAsAAAACACgAAAAHAAsAAAADACgAAAAHAAs
 tile_set = SubResource("TileSet_cere6")
 
 [node name="Player" parent="." instance=ExtResource("3_crnsi")]
-position = Vector2(70, 602)
+position = Vector2(1253, 606)
 
 [node name="pCam" type="Camera2D" parent="Player"]
+zoom = Vector2(1.5, 1.5)
+
+[node name="spawnPointShooter" type="Marker2D" parent="."]
+position = Vector2(572, 613)
+
+[node name="spawnPointTurrent" type="Marker2D" parent="."]
+position = Vector2(1360, 543)

@@ -1,7 +1,6 @@
 extends CharacterBody2D
 signal enemy_defeated
 
-
 @onready var turrent_ray_front = $turrentRayFront
 @onready var turrent_ray_back  = $turrentRayBack
 @onready var turrent_sprite = $turrentSprite

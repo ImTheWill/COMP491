@@ -23,7 +23,6 @@ var is_climbing = false
 func _ready():
 	add_to_group("Player")
 	p_cam.make_current()
-	
 
 func _physics_process(delta):
 	if global_position.y > 1040 and not is_on_floor():
@@ -176,8 +175,9 @@ func hit(direction):
 	player_sprite.play("hurt")
 	await get_tree().create_timer(0.5).timeout
 	if health <= 0:
-		get_tree().reload_current_scene()
+		if(get_tree() != null):
+			get_tree().reload_current_scene()
+		#error when dying cause bug that reloads the 
 	else:
 		health -= 10
-		player_health_bar.change_health(-10)
 	print("Damage taken, health is:", health)

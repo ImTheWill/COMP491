@@ -90,13 +90,11 @@ frame_progress = 0.640335
 [node name="turrentRayFront" type="RayCast2D" parent="."]
 scale = Vector2(0.989899, 1)
 target_position = Vector2(-153.551, 0)
-hit_from_inside = true
 collide_with_areas = true
 
 [node name="turrentRayBack" type="RayCast2D" parent="."]
 scale = Vector2(-0.99, -1)
 target_position = Vector2(-153.551, 0)
-hit_from_inside = true
 collide_with_areas = true
 
 [node name="EnemyHealthBar" parent="." instance=ExtResource("8_gv463")]
