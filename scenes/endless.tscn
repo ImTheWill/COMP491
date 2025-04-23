@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://glijkqk7wpu1"]
+[gd_scene load_steps=15 format=4 uid="uid://glijkqk7wpu1"]
 
 [ext_resource type="Texture2D" uid="uid://d37hh44ma2yu1" path="res://assets/warped city files/ENVIRONMENT/tileset.png" id="1_28067"]
 [ext_resource type="Script" path="res://scripts/endless.gd" id="1_x0b4o"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://c0ddwf8talk5j" path="res://assets/Sunset/sun.png" id="5_e4b2m"]
 [ext_resource type="Texture2D" uid="uid://cqkcxtbgfljvn" path="res://assets/Sunset/far-buildings.png" id="6_rkhxy"]
 [ext_resource type="Texture2D" uid="uid://7a1c7r16ds07" path="res://assets/Sunset/near-buildings.png" id="7_ee1ef"]
+[ext_resource type="FontFile" uid="uid://bm22e4yafek3d" path="res://assets/fonts/Minecraft.ttf" id="10_8ousy"]
+[ext_resource type="Script" path="res://scripts/currentscore_label.gd" id="11_gpfbt"]
+[ext_resource type="PackedScene" uid="uid://c2g4ddtwrw3i2" path="res://scenes/UI/HealthBar.tscn" id="12_64ybd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wnmor"]
 texture = ExtResource("1_28067")
@@ -312,4 +315,39 @@ zoom = Vector2(1.5, 1.5)
 position = Vector2(572, 613)
 
 [node name="spawnPointTurrent" type="Marker2D" parent="."]
-position = Vector2(1360, 543)
+position = Vector2(1396, 541)
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="scoreLabel" type="StaticBody2D" parent="UILayer"]
+position = Vector2(15, 254)
+
+[node name="currentscoreLabel" type="RichTextLabel" parent="UILayer/scoreLabel"]
+offset_left = 1.0
+offset_top = -52.0
+offset_right = 132.0
+offset_bottom = -12.0
+theme_override_fonts/normal_font = ExtResource("10_8ousy")
+theme_override_font_sizes/normal_font_size = 22
+text = "Score: 0"
+script = ExtResource("11_gpfbt")
+
+[node name="HealthBar" parent="UILayer" instance=ExtResource("12_64ybd")]
+offset_left = 2.0
+offset_top = 175.0
+offset_right = 202.0
+offset_bottom = 205.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="wave" type="Label" parent="UILayer"]
+offset_left = 16.0
+offset_top = 161.0
+offset_right = 102.0
+offset_bottom = 187.0
+scale = Vector2(1.042, 1)
+theme_override_fonts/font = ExtResource("10_8ousy")
+theme_override_font_sizes/font_size = 25
+text = "WAVE 1
+"
+horizontal_alignment = 1

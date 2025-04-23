@@ -8,9 +8,13 @@ var startingNodes: int
 var currentNodes: int
 var wave_spawn_ended: int
 var moving_next_wave: bool
+@onready var wave = $UILayer/wave
+
+
+
 
 func _ready():
-	currentWave = 3
+	currentWave = 0
 	currentNodes = get_child_count()
 	startingNodes = get_child_count()
 	position_to_next_wave()
@@ -30,12 +34,13 @@ func position_to_next_wave():
 		await get_tree().create_timer(0.5)
 		#prepare_spawn and type
 		print(currentWave)
+		wave.text = "WAVE " + str(currentWave)
 		prepare_spawn("shooter", 3.0, 3.0)
 		prepare_spawn("turrent", 1.0, 1.0)
 
 func prepare_spawn(type, multiplier, mobSpawns):
 	var mobAmount = float(currentWave) * multiplier
-	var mob_wait_time: float = 2.0
+	var mob_wait_time: float = 3.0
 	print("mob amount: ", mobAmount)
 	var mobSpawnRounds = mobAmount/mobSpawns
 	spawnType(type, mobSpawnRounds, mob_wait_time)
