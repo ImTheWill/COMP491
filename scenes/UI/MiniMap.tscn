@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bh5j803s0msso"]
+
+[ext_resource type="Script" path="res://scripts/mini_map.gd" id="1_lb0cs"]
+[ext_resource type="Texture2D" uid="uid://ca3c7b3aorp61" path="res://assets/warped city files/ENVIRONMENT/background/e48770b0cbca2a414716d12a19d9916c.png" id="2_me5jh"]
+
+[node name="MiniMap" type="Node2D"]
+script = ExtResource("1_lb0cs")
+
+[node name="MiniMapDisplay" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 300.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_me5jh")
+expand_mode = 1
