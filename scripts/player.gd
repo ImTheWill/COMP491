@@ -7,13 +7,23 @@ extends CharacterBody2D
 @onready var ladder_ray = $ladderRay
 @onready var ladder_checker_ray = $ladderCheckerRay
 @onready var player_health_bar = $HealthBar
+@onready var cooldown_timer = $cooldown
 @export var inv: Inv 
+
 const MAX_SPEED = 200
 const ACCELERATION = 1000
 const JUMP_FORCE = -400
 const FRICTION = 900
 const CLIMB_SPEED = 100
 var health = 100
+var can_shoot := true
+
+# Preload the bullet scene
+var BulletScene = preload("res://scenes/player/bullet.tscn")
+
+# Cooldown settings
+const COOLDOWN_TIME := 0.5
+var time_since_last_shot := 0.0
 
 var platform_velocity = Vector2.ZERO
 var on_moving_platform = false
@@ -28,6 +38,12 @@ func _physics_process(delta):
 	if global_position.y > 1040 and not is_on_floor():
 		get_tree().reload_current_scene()
 	
+	time_since_last_shot += delta
+	if can_shoot:
+		if Input.is_action_pressed("shoot") and time_since_last_shot >= COOLDOWN_TIME:
+			shoot()
+			time_since_last_shot = 0
+
 	#Ensure only ladders trigger climbing mode
 	var ladder_check_collider = ladder_checker_ray.get_collider()
 	var ladder_collider = ladder_ray.get_collider()
@@ -165,10 +181,41 @@ func player():
 	pass
 
 func shoot():
+	can_shoot = false
+	
 	var new_bullet = BULLET.instantiate()
-	new_bullet.dir = -1 if player_sprite.flip_h else 1
-	new_bullet.spawnPos = bullet_start.global_position
-	get_tree().root.add_child(new_bullet)
+	get_parent().add_child(new_bullet)
+	
+	new_bullet.global_position = bullet_start.global_position
+	
+	# Get the raw direction from bulletStart to the mouse
+	var mouse_pos = get_global_mouse_position()
+	var raw_dir = (mouse_pos - new_bullet.global_position).normalized()
+	var raw_angle = raw_dir.angle()
+	
+	# Determine the player's facing angle
+	var facing_angle = 0.0
+	if player_sprite.flip_h:
+		facing_angle = PI
+	
+	# Calculate the relative angle difference (between [-PI, PI])
+	var relative_angle = wrapf(raw_angle - facing_angle, -PI, PI)
+	# Clamp the relative angle to [-PI/2, PI/2]
+	var clamped_relative = clamp(relative_angle, -PI/2, PI/2)
+	
+	# Compute the final angle for bullet direction
+	var final_angle = facing_angle + clamped_relative
+	var final_direction = Vector2(cos(final_angle), sin(final_angle))
+	
+	 # Rotate the bullet to face the direction it is moving
+	new_bullet.rotation = final_direction.angle()
+	new_bullet.set_direction(final_direction)
+	
+	cooldown_timer.start()
+
+func _on_cooldown_timeout():
+	can_shoot = true
+
 func hit(direction):
 #	velocity.x += 300 * direction
 	move_and_slide()

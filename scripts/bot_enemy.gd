@@ -29,7 +29,6 @@ func _physics_process(delta):
 		emit_signal("enemy_defeated")
 		Global.score += points_per_kill
 		queue_free()
-	#print(timer.is_stopped())
 	if botPlayerRay && timer.is_stopped():
 		if(botPlayerRay!=null):
 			if botPlayerRay.is_in_group("Player"):

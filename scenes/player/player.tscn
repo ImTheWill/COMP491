@@ -248,3 +248,8 @@ offset_left = -92.0
 offset_top = -173.0
 offset_right = 113.0
 offset_bottom = -173.0
+
+[node name="cooldown" type="Timer" parent="."]
+wait_time = 0.2
+
+[connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]

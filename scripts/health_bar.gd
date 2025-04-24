@@ -18,10 +18,9 @@ func change_health(newValue):
 		fill_change(HealthBar1, newValue)
 	HealthBar1.add_theme_stylebox_override("fill", styleBox)
 	
-	
-#error in health change on null val
 func fill_change(healthBar, changeVal):
 	for i in abs(changeVal):
-		await get_tree().create_timer(0.05).timeout
-		if changeVal < 0: healthBar.value -=1
-		elif changeVal >  0: healthBar.value +=1
+		if(get_tree()!=null):
+			await get_tree().create_timer(0.05).timeout
+			if changeVal < 0: healthBar.value -=1
+			elif changeVal >  0: healthBar.value +=1
