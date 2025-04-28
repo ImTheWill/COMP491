@@ -17,8 +17,6 @@ func _ready():
 	currentWave = 0
 	currentNodes = get_child_count()
 	startingNodes = get_child_count()
-	print("currentN",currentNodes)
-	print("startN",startingNodes)
 	position_to_next_wave()
 	
 func _process(delta):
@@ -28,8 +26,6 @@ func _process(delta):
 		wave_spawn_ended = true
 	
 func position_to_next_wave():
-	print("Checking currentN",currentNodes)
-	print("Checking startN",startingNodes)
 	if currentNodes == startingNodes:
 		if currentWave !=0 :
 				moving_next_wave = true
@@ -41,8 +37,6 @@ func position_to_next_wave():
 		wave.text = "WAVE " + str(currentWave)
 		prepare_spawn("shooter", 3.0, 3.0)
 		prepare_spawn("turrent", 1.0, 1.0)
-		if currentWave > 3:
-			prepare_spawn("Robot", 2.0, 2.0)
 
 func prepare_spawn(type, multiplier, mobSpawns):
 	var mobAmount = float(currentWave) * multiplier
@@ -63,22 +57,13 @@ func spawnType(type, mobSpawnRounds, mob_wait_time):
 				await get_tree().create_timer(mob_wait_time).timeout
 	elif type == "turrent":
 		var turrentSpawn = $spawnPointTurrent
-		var turrentSpawn2 = $spawnPointTurrent2
 		if mobSpawnRounds >= 1:
 			for i in mobSpawnRounds:
 				var turrent1 = turrent.instantiate()
-				var turrent2 = turrent.instantiate()
-				turrent2.global_position = turrentSpawn2.global_position
 				turrent1.global_position = turrentSpawn.global_position
-				if mobSpawnRounds > 2:
-					add_child(turrent2)
 				add_child(turrent1)
 				mobSpawnRounds -=1
 				await get_tree().create_timer(mob_wait_time).timeout
-				
-				
-	elif type == "Robot":
-		await get_tree().create_timer(mob_wait_time).timeout
 	wave_spawn_ended = true
 	
 	
