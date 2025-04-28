@@ -35,4 +35,9 @@ shape = SubResource("CapsuleShape2D_a0nsi")
 scale = Vector2(0.2, 0.152)
 sprite_frames = SubResource("SpriteFrames_617mb")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

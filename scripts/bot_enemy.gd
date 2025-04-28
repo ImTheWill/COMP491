@@ -65,7 +65,7 @@ func flip():
 func shoot():
 	print("has shot")
 	var new_bullet = BULLET.instantiate()
-	new_bullet.dir = -1 if bot_sprite.flip_h else 1
+	new_bullet.direction = Vector2(-1,0) if bot_sprite.flip_h else Vector2(1,0)
 	new_bullet.spawnPos = bullet_start.global_position 
 	new_bullet.speed = 500
 	get_tree().root.add_child(new_bullet)
