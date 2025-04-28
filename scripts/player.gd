@@ -216,7 +216,7 @@ func shoot():
 func _on_cooldown_timeout():
 	can_shoot = true
 
-func hit(direction):
+func hit(_direction):
 #	velocity.x += 300 * direction
 	move_and_slide()
 	player_sprite.play("hurt")

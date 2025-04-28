@@ -14,6 +14,10 @@ func _ready():
 	$Player.player_health_bar = $CanvasLayer/HealthBar
 	
 	boss.boss_defeated.connect(_on_boss_defeated)
+func _physics_process(_delta):
+	if Input.is_action_pressed("Exit"):
+		var pause_menu = overlayMenu.instantiate()
+		add_child(pause_menu)
 
 func _on_boss_defeated():
 	
