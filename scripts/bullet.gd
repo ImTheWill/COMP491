@@ -1,5 +1,6 @@
 extends RigidBody2D
 @onready var bullet_sprite = $bulletSprite
+@onready var timer = $Timer
 
 var spawnPos : Vector2
 var direction = Vector2.ZERO
@@ -15,6 +16,8 @@ func _ready():
 	#linear_velocity.x = speed * dir
 
 func _physics_process(delta):
+	if timer.is_stopped():
+		queue_free()
 	position += direction * speed * delta
 	linear_velocity = velocity
 
