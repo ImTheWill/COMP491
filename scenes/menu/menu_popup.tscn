@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckg2ba8e3xqo5"]
+[gd_scene load_steps=6 format=3 uid="uid://c85pbfpq160tw"]
 
+[ext_resource type="Script" path="res://scenes/menu/menu_popup.gd" id="1_1jb7j"]
 [ext_resource type="FontFile" uid="uid://bm22e4yafek3d" path="res://assets/fonts/Minecraft.ttf" id="1_8helh"]
-[ext_resource type="Script" path="res://scripts/menu_scripts/menu_popup.gd" id="1_t8ib2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7iw3"]
 bg_color = Color(0, 0, 0, 0.333333)
@@ -13,7 +13,7 @@ bg_color = Color(0, 0, 0, 0)
 
 [node name="MenuPopup" type="CanvasLayer"]
 process_mode = 3
-script = ExtResource("1_t8ib2")
+script = ExtResource("1_1jb7j")
 
 [node name="overlay" type="PanelContainer" parent="."]
 anchors_preset = 15

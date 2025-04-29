@@ -1,17 +1,14 @@
 extends Node2D
 
-
-var currentWave: int
 @export var shooter: PackedScene
 @export var turrent: PackedScene
+@onready var wave = $UILayer/wave
+@onready var overlayMenu = preload("res://scenes/menu/menu_popup.tscn")
+var currentWave: int
 var startingNodes: int
 var currentNodes: int
 var wave_spawn_ended: int
 var moving_next_wave: bool
-@onready var wave = $UILayer/wave
-
-
-
 
 func _ready():
 	currentWave = 0
@@ -20,7 +17,12 @@ func _ready():
 	print("currentN",currentNodes)
 	print("startN",startingNodes)
 	position_to_next_wave()
-	
+ 
+func _physics_process(_delta):
+	if Input.is_action_pressed("Exit"):
+		var pause_menu = overlayMenu.instantiate()
+		add_child(pause_menu)
+
 func _process(delta):
 	currentNodes = get_child_count()
 	if(wave_spawn_ended):
@@ -28,8 +30,8 @@ func _process(delta):
 		wave_spawn_ended = true
 	
 func position_to_next_wave():
-	print("Checking currentN",currentNodes)
-	print("Checking startN",startingNodes)
+	print("currentNodes:", currentNodes)
+	print("startNodes:", startingNodes)
 	if currentNodes == startingNodes:
 		if currentWave !=0 :
 				moving_next_wave = true
