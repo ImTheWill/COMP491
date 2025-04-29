@@ -2,6 +2,9 @@ extends Node2D
 
 @export var shooter: PackedScene
 @export var turrent: PackedScene
+@export var robot: PackedScene
+@export var boss: PackedScene
+
 @onready var wave = $UILayer/wave
 @onready var overlayMenu = preload("res://scenes/menu/menu_popup.tscn")
 var currentWave: int
@@ -11,7 +14,7 @@ var wave_spawn_ended: int
 var moving_next_wave: bool
 
 func _ready():
-	currentWave = 0
+	currentWave = 10
 	currentNodes = get_child_count()
 	startingNodes = get_child_count()
 	print("currentN",currentNodes)
@@ -43,8 +46,10 @@ func position_to_next_wave():
 		wave.text = "WAVE " + str(currentWave)
 		prepare_spawn("shooter", 3.0, 3.0)
 		prepare_spawn("turrent", 1.0, 1.0)
-		if currentWave > 3:
+		if currentWave > 2:
 			prepare_spawn("Robot", 2.0, 2.0)
+		if currentWave%10:
+			prepare_spawn("Boss", 1.0, 1.0)
 
 func prepare_spawn(type, multiplier, mobSpawns):
 	var mobAmount = float(currentWave) * multiplier
@@ -80,7 +85,34 @@ func spawnType(type, mobSpawnRounds, mob_wait_time):
 				
 				
 	elif type == "Robot":
-		await get_tree().create_timer(mob_wait_time).timeout
+		var robotSpawn1 = $spawnPointRobot
+		var robotSpawn2 = $spawnPointRobot2
+		var robotSpawn3 = $spawnPointRobot3
+		if mobSpawnRounds >= 1:
+			for i in mobSpawnRounds:
+				var robot1 = robot.instantiate()
+				var robot2 = robot.instantiate()
+				var robot3 = robot.instantiate()
+				robot1.global_position = robotSpawn1.global_position
+				robot2.global_position = robotSpawn2.global_position
+				robot3.global_position = robotSpawn3.global_position
+				if mobSpawnRounds > 1:
+					add_child(robot2)
+					if mobSpawnRounds > 2:
+						add_child(robot3)
+				add_child(robot1)
+				mobSpawnRounds -=1
+				await get_tree().create_timer(mob_wait_time).timeout
+				
+	elif type == "Boss":
+		var bossSpawn1 = $spawnBoss
+		if mobSpawnRounds >= 1:
+			for i in mobSpawnRounds:
+				var boss1 = boss.instantiate()
+				boss1.global_position = bossSpawn1.global_position
+				add_child(boss1)
+				mobSpawnRounds -= 1
+				await get_tree().create_timer(mob_wait_time).timeout
 	wave_spawn_ended = true
 	
 	
