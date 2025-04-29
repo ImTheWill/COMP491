@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bod4a3rwyxrdc"
-path="res://.godot/imported/e48770b0cbca2a414716d12a19d9916c.png-279119dbce2c10ccb451bdf9f29fa2b3.ctex"
+uid="uid://cdqydsny5v7t"
+path="res://.godot/imported/Player.png-ec4f1e5c9393e4c93cdab34f241fad28.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/warped city files/ENVIRONMENT/background/e48770b0cbca2a414716d12a19d9916c.png"
-dest_files=["res://.godot/imported/e48770b0cbca2a414716d12a19d9916c.png-279119dbce2c10ccb451bdf9f29fa2b3.ctex"]
+source_file="res://assets/Achievement UI/Player.png"
+dest_files=["res://.godot/imported/Player.png-ec4f1e5c9393e4c93cdab34f241fad28.ctex"]
 
 [params]
 

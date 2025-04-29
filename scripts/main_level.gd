@@ -6,14 +6,18 @@ extends Node2D
 @onready var boss = $bossEnemy
 
 @onready var result_screen = $CanvasLayer/ResultScreen
+@onready var mini_map = $UILayer/MiniMap
+@onready var player = $Player
 
 func _ready():
 
 	result_screen.visible = false
 	
-	$Player.player_health_bar = $CanvasLayer/HealthBar
+	$Player.player_health_bar = $UILayer/HealthBar
 	
 	boss.boss_defeated.connect(_on_boss_defeated)
+	
+	mini_map.player_ref = player
 
 func _on_boss_defeated():
 	
