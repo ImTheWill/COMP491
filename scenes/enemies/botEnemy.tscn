@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dbmjwrfpbhou1"]
+[gd_scene load_steps=19 format=3 uid="uid://dbmjwrfpbhou1"]
 
 [ext_resource type="Texture2D" uid="uid://cmjedgqw6scst" path="res://assets/warped city files/Warped-city-addon-files/Sprites/grasshopper-bot/grasshopper-bot1.png" id="1_5fccn"]
 [ext_resource type="Script" path="res://scripts/bot_enemy.gd" id="1_brr4g"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://4bor3gol3skj" path="res://assets/warped city files/SPRITES/misc/enemy-explosion/enemy-explosion-6.png" id="7_1ltyy"]
 [ext_resource type="Texture2D" uid="uid://cxdf03k1rww8w" path="res://assets/sprites/13.png" id="8_l07i5"]
 [ext_resource type="PackedScene" uid="uid://djfcb0gpaeask" path="res://scenes/UI/EnemeyHB.tscn" id="9_3wdou"]
+[ext_resource type="Texture2D" uid="uid://n4orfx2o80t6" path="res://icon.svg" id="16_plk1c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hsc5s"]
 size = Vector2(16, 43)
@@ -110,3 +111,10 @@ hit_from_inside = true
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="BulletStart" type="Node2D" parent="."]
+
+[node name="TurretSprite" type="Sprite2D" parent="."]
+position = Vector2(15, 0)
+scale = Vector2(0.240863, 0.0529886)
+texture = ExtResource("16_plk1c")
