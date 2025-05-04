@@ -25,7 +25,6 @@ func _physics_process(_delta):
 		add_child(pause_menu)
 
 func _on_boss_defeated():
-	
 	print("Boss defeated! Unlocking achievement...")
 	achievement_system.unlock_achievement("defeat_boss")
 	result_screen.show_simple_result()

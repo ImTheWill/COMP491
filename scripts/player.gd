@@ -185,6 +185,7 @@ func shoot():
 	can_shoot = false
 	
 	var new_bullet = BULLET.instantiate()
+	new_bullet.sprite = "default"
 	get_parent().add_child(new_bullet)
 	
 	new_bullet.global_position = bullet_start.global_position

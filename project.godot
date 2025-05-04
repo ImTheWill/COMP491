@@ -28,6 +28,10 @@ window/size/viewport_height=720
 window/size/initial_position_type=2
 window/stretch/mode="viewport"
 
+[dotnet]
+
+project/assembly_name="GAME491"
+
 [input]
 
 shoot={
