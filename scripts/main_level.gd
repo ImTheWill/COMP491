@@ -6,14 +6,19 @@ extends Node2D
 @onready var boss = $bossEnemy
 
 @onready var result_screen = $CanvasLayer/ResultScreen
+@onready var mini_map = $UILayer/MiniMap
+@onready var player = $Player
 
 func _ready():
 
 	result_screen.visible = false
 	
-	$Player.player_health_bar = $CanvasLayer/HealthBar
-	
-	boss.boss_defeated.connect(_on_boss_defeated)
+	$Player.player_health_bar = $UILayer/HealthBar
+    
+    boss.boss_defeated.connect(_on_boss_defeated)
+
+    	mini_map.player_ref = player
+
 func _physics_process(_delta):
 	if Input.is_action_pressed("Exit"):
 		var pause_menu = overlayMenu.instantiate()

@@ -61,6 +61,7 @@ func _physics_process(delta):
 		velocity += platform_velocity * delta
 	
 	move_and_slide()
+	print("Player global_position:", global_position)
 	
 	# Re-enable ladder detection when on floor
 	if is_on_floor() and not ladder_ray.is_colliding():

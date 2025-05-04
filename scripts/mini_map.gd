@@ -1,98 +1,139 @@
 extends Node2D
 
-# Node references
-@onready var mini_display: TextureRect = get_node_or_null("MiniMapDisplay")
-@onready var viewport: SubViewport = get_node_or_null("SubViewportContainer/MiniMapViewport")
-@onready var mini_tilemap: TileMap = get_node_or_null("SubViewportContainer/MiniMapViewport/MiniMapRoot/TileMapLayer")
+@export var player_path: NodePath
+@export var main_map_path: NodePath
+@export var enable_auto_marker_scale: bool = true
+@export var base_marker_scale: float = 1.0
+@export var y_axis_correction: float = 1.0 
 
-# Configuration variables
-@export var source_tilemap: TileMap
-@export var map_scale: float = 0.2
-@export var top_left_position: Vector2 = Vector2(20, 20)
+@onready var player_ref: Node2D = null
+@onready var player_marker: Sprite2D = $SubViewportContainer/SubViewport/PlayerMarker
+@onready var main_map_ref: TileMapLayer = null
+@onready var minimap_viewport_container: SubViewportContainer = $SubViewportContainer
+
+var main_map_size: Vector2 = Vector2.ZERO
+var map_start_pixel: Vector2 = Vector2.ZERO
+
+var virtual_cols: int = 128
+var virtual_rows: int = 32
+var cell_width: float = 0.0
+var cell_height: float = 0.0
+
+var minimap_virtual_cols: int = 16
+var minimap_virtual_rows: int = 4
+var minimap_cell_width: float = 0.0
+var minimap_cell_height: float = 0.0
+
+
 
 func _ready():
-	print_debug("=== Minimap Initialization Started ===")
+	
+	# Initialize player reference
+	if player_path:
+		player_ref = get_node(player_path)
+		print("MiniMap _ready(): Player ref set to", player_ref)
+	else:
+		print("MiniMap _ready(): player_path not assigned!")
 
-	#  Validate required nodes
-	if not _validate_nodes():
-		push_error("Minimap initialization failed due to missing nodes.")
+	# Initialize main map reference
+	if main_map_path:
+		main_map_ref = get_node(main_map_path)
+		print("MiniMap _ready(): Main Map ref set to", main_map_ref)
+
+		var used_rect = main_map_ref.get_used_rect()
+		var tile_size = main_map_ref.tile_set.tile_size
+		main_map_size = Vector2(used_rect.size.x * tile_size.x, used_rect.size.y * tile_size.y)
+		map_start_pixel = Vector2(used_rect.position.x * tile_size.x, used_rect.position.y * tile_size.y)
+
+		print("Main Level TileMap size in pixels:", main_map_size)
+		print("Main Map start pixel:", map_start_pixel)
+		
+		cell_width = main_map_size.x / virtual_cols  
+		cell_height = main_map_size.y / virtual_rows 
+		print("Each Virtual Cell Size:", cell_width, "x", cell_height)
+		
+		var minimap_size = $SubViewportContainer/SubViewport.size
+		minimap_cell_width = minimap_size.x / minimap_virtual_cols
+		minimap_cell_height = minimap_size.y / minimap_virtual_rows
+		print("Each MiniMap Cell Size:", minimap_cell_width, "x", minimap_cell_height)
+		
+		
+		
+	else:
+		print("MiniMap _ready(): main_map_path not assigned!")
+		
+		
+		
+	print("======== MiniMap Debug Info ========")
+	print("Map Start Pixel:", map_start_pixel)
+	print("Main Map Size:", main_map_size)
+	print("TileMap Global Position:", main_map_ref.global_position)
+	print("Player Global Position:", player_ref.global_position)
+	print("MiniMap Viewport Size:", $SubViewportContainer/SubViewport.size)
+	print("Virtual Cell Size (MainMap):", cell_width, "x", cell_height)
+	print("Virtual Cell Size (MiniMap):", minimap_cell_width, "x", minimap_cell_height)
+	print("PlayerMarker Centered:", player_marker.centered)
+	print("PlayerMarker Offset:", player_marker.offset)
+	print("======== End Debug Info ========")
+	print("=== MiniMap SubViewportContainer Info ===")
+	print("Global Position:", minimap_viewport_container.global_position)
+	print("Size:", minimap_viewport_container.size)
+	print("Rect Position (local):", minimap_viewport_container.position)
+	
+	var minimap_camera = $SubViewportContainer/SubViewport/Camera2D
+	if minimap_camera:
+		var minimap_size = $SubViewportContainer/SubViewport.size
+		minimap_camera.position = minimap_size / 2
+		minimap_camera.zoom = Vector2(1, 1)  # Keep zoom 1:1, no additional scaling
+		print("MiniMap Camera positioning done. Camera position:", minimap_camera.position)
+	else:
+		print("MiniMap TileMapLayer node not found!")
+
+
+func _update_marker_position():
+	# Update the player marker position and scale on the MiniMap
+	player_marker.visible = false
+
+	if not player_ref or not main_map_ref:
 		return
 
-	#  Setup display behavior
-	_force_display_setup()
+	var player_global_pos = player_ref.global_position
+	var adjusted_pos = player_global_pos - main_map_ref.global_position
 
-	#  Defer tilemap data loading
-	call_deferred("initialize_minimap")
+	var player_virtual_x = int((adjusted_pos.x - map_start_pixel.x) / cell_width)
+	var player_virtual_y = int((adjusted_pos.y - map_start_pixel.y) / cell_height)
 
-func _validate_nodes() -> bool:
-	var success = true
+	print("Virtual Grid X:", player_virtual_x, "Y:", player_virtual_y)
 
-	if not mini_tilemap:
-		push_error("MiniTileMap not found! Path: " + String(get_path_to(get_node("SubViewportContainer/MiniMapViewport/MiniMapRoot"))))
+	var minimap_pos_x = player_virtual_x * minimap_cell_width
+	var minimap_pos_y = player_virtual_y * minimap_cell_height * y_axis_correction
+
+	var minimap_size = $SubViewportContainer/SubViewport.size
+	var minimap_tilemap = $SubViewportContainer/SubViewport/TileMapLayer
+	var tilemap_scale = minimap_tilemap.scale if minimap_tilemap else Vector2(1, 1)
+	
+	player_marker.position = Vector2(minimap_pos_x, minimap_pos_y) * tilemap_scale
+	
 
 
-		success = false
+	player_marker.visible = true
+	print("Player Marker Actual Pos:", player_marker.position)
 
-	if not mini_display:
-		push_error("MiniMapDisplay (TextureRect) not found!")
-		success = false
-
-	if not viewport:
-		push_error("SubViewport not found!")
-		success = false
-
-	if success:
-		print_debug(" ll required nodes are present.")
-	return success
-
-func _force_display_setup():
-	# Ensure display node properties are correct
-	mini_display.position = top_left_position
-	mini_display.texture = viewport.get_texture()
-	mini_display.scale = Vector2(map_scale, -map_scale)  # Flip Y axis
-	mini_display.show()
-
-	# Debug output for verification
-	print_debug("Minimap position: ", mini_display.position)
-	print_debug("Viewport size: ", viewport.size)
-	print_debug("Viewport texture valid: ", viewport.get_texture() != null)
-
-func initialize_minimap():
-	if not source_tilemap:
-		push_error("Source TileMap is not assigned!")
+	
+func _process(delta):
+	# Every frame update marker position
+	if not player_ref or not player_marker:
 		return
-
-	print_debug("Initializing minimap data...")
-
-	# Draw a test tile (for visual confirmation)
-	mini_tilemap.clear()
-	mini_tilemap.set_cell(0, Vector2i(0,0), 0, Vector2i(0,0))
-	print_debug("Test tile placed at (0,0)")
-
-	# Proceed to full minimap generation
-	update_minimap()
-
-func update_minimap():
-	if not source_tilemap or not mini_tilemap:
+	if not main_map_ref or main_map_size == Vector2.ZERO:
 		return
+	
+	_update_marker_position()
 
-	print_debug("Updating minimap tiles from source map...")
 
-	mini_tilemap.tile_set = source_tilemap.tile_set.duplicate()
 
-	var cells_copied = 0
-	for layer in source_tilemap.get_layers_count():
-		for coords in source_tilemap.get_used_cells(layer):
-			var tile_data = source_tilemap.get_cell_tile_data(layer, coords)
-			if tile_data:
-				mini_tilemap.set_cell(
-					layer,
-					coords,
-					source_tilemap.get_cell_source_id(layer, coords),
-					source_tilemap.get_cell_atlas_coords(layer, coords),
-					source_tilemap.get_cell_alternative_tile(layer, coords)
-				)
-				cells_copied += 1
-
-	print_debug("Minimap update complete. Copied %d tiles." % cells_copied)
-	print_debug("=== Minimap System Ready ===")
+	
+	
+	
+	
+	
+	
