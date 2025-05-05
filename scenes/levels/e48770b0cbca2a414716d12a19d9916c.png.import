@@ -2,26 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<<< Updated upstream:assets/Achievement UI/Enemy.png.import
-uid="uid://rr2t6fmyouxk"
-path="res://.godot/imported/Enemy.png-05dd9ad5d52f74219fe059f30b538bc0.ctex"
-========
-uid="uid://bod4a3rwyxrdc"
+uid="uid://b0203haj7qsyv"
 path="res://.godot/imported/e48770b0cbca2a414716d12a19d9916c.png-f0144037f21c5bd9a5d802718e648621.ctex"
->>>>>>>> Stashed changes:scenes/levels/e48770b0cbca2a414716d12a19d9916c.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<<< Updated upstream:assets/Achievement UI/Enemy.png.import
-source_file="res://assets/Achievement UI/Enemy.png"
-dest_files=["res://.godot/imported/Enemy.png-05dd9ad5d52f74219fe059f30b538bc0.ctex"]
-========
 source_file="res://scenes/levels/e48770b0cbca2a414716d12a19d9916c.png"
 dest_files=["res://.godot/imported/e48770b0cbca2a414716d12a19d9916c.png-f0144037f21c5bd9a5d802718e648621.ctex"]
->>>>>>>> Stashed changes:scenes/levels/e48770b0cbca2a414716d12a19d9916c.png.import
 
 [params]
 
