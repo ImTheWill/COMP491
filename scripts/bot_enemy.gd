@@ -4,12 +4,12 @@ signal enemy_defeated
 @onready var bot_player_ray = $botPlayerRay
 @onready var bot_floor_ray = $botFloorRay
 @onready var enemy_health_bar = $EnemyHealthBar
-# @onready var bullet_start = $bulletStart
-@export var bullet_start: Node2D
+@onready var bullet_start = $bulletStart
+#@export var bullet_start: Node2D
 @onready var bot_sprite = $botSprite
 @onready var timer = $Timer
-# @onready var BULLET = load("res://scenes/player/bullet.tscn")
-@export var BULLET: PackedScene
+@onready var BULLET = load("res://scenes/player/bullet.tscn")
+#@export var BULLET: PackedScene
 @onready var area2d = $Area2D
 @export var move_speed = 150
 @export var shoot_cooldown = 0.5  # Seconds between shots
@@ -28,9 +28,13 @@ func _ready():
 	add_to_group("Enemy")
 	timer.wait_time = shoot_cooldown
 	timer.one_shot = true
-	player = get_parent().get_node_or_null("Player")  # Adjust path if necessary
-	if not player:
-		print("Player not found in scene!")
+ # Recursively search for node named "Player"
+	player = get_tree().current_scene.find_child("Player", true, false)
+
+	if player == null:
+		print("Player not found in scene!")	# res://scenes/player/player.tscn
+	# if not player:
+		# print("Player not found in scene!")
 	
 func _physics_process(delta):
 	var botPlayerRay = bot_player_ray.get_collider()
@@ -52,11 +56,14 @@ func _physics_process(delta):
 		velocity.y += get_gravity().y *delta
 	if !bot_floor_ray.is_colliding() && is_on_floor():
 		flip()
-	
-	if player:
+		
+	if player == null or !is_instance_valid(player):
+		player = get_tree().current_scene.find_child("Player", true, false)
+
+	if player != null and is_instance_valid(player):
 		# Move towards player
 		var direction_to_player = (player.global_position - global_position).normalized()
-		velocity = direction_to_player * move_speed
+		velocity.x = direction_to_player.x * move_speed
 		move_and_slide()
 
 		# Aim turret at player

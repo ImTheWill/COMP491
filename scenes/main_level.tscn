@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://cc2q4ajap1nf" path="res://scenes/enemies/bossEnemy.tscn" id="18_vyt7q"]
 [ext_resource type="PackedScene" uid="uid://bw5x5gcjj2l2w" path="res://scenes/Achievement System/Achievement.tscn" id="19_j1olr"]
 [ext_resource type="Script" path="res://scripts/AchievementSystem.gd" id="20_8jw45"]
-[ext_resource type="PackedScene" uid="uid://cjoqoj0f43ku4" path="res://scenes/UI/ResultScreen.tscn" id="21_56cqh"]
+[ext_resource type="PackedScene" path="res://scenes/UI/ResultScreen.tscn" id="21_56cqh"]
 [ext_resource type="PackedScene" uid="uid://clhn4gbtg0bmb" path="res://inventory/items/medkit_collectable.tscn" id="23_revib"]
 [ext_resource type="PackedScene" uid="uid://bad1m37i5ekb2" path="res://inventory/items/bullet_collectable.tscn" id="24_u83xl"]
 
