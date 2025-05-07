@@ -113,8 +113,12 @@ wait_time = 0.2
 one_shot = true
 
 [node name="BulletStart" type="Node2D" parent="."]
+rotation = -0.000332474
 
 [node name="TurretSprite" type="Sprite2D" parent="."]
-position = Vector2(15, 0)
+visible = false
+position = Vector2(0.0648611, -0.000301361)
+rotation = -0.000332474
 scale = Vector2(0.240863, 0.0529886)
 texture = ExtResource("16_plk1c")
+offset = Vector2(62.0068, 0.0241036)

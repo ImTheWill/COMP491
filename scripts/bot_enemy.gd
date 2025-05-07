@@ -1,132 +1,59 @@
 extends CharacterBody2D
-signal enemy_defeated
 
-@onready var bot_player_ray = $botPlayerRay
-@onready var bot_floor_ray = $botFloorRay
-@onready var enemy_health_bar = $EnemyHealthBar
-@onready var bullet_start = $bulletStart
-#@export var bullet_start: Node2D
-@onready var bot_sprite = $botSprite
-@onready var timer = $Timer
-@onready var BULLET = load("res://scenes/player/bullet.tscn")
-#@export var BULLET: PackedScene
-@onready var area2d = $Area2D
-@export var move_speed = 150
-@export var shoot_cooldown = 0.5  # Seconds between shots
-@onready var turret_sprite = $TurretSprite
+@export var SPEED = 100
+@export var GRAVITY = 800
+@export var BULLET = preload("res://scenes/player/bullet.tscn")
+@export var SHOOT_COOLDOWN = 1.5  # seconds
+const FLIP_THRESHOLD = 16
 
+var player = null
+var facing_dir = 1  # 1 = right, -1 = left
+var shoot_timer = 0.0
 
-var speed = 60
-var facing_right = false
-var health = 100
-var points_per_kill = 100
-var player: Node2D
-var can_shoot = true
+@onready var sprite = $botSprite
+@onready var bullet_start = $BulletStart
 
 func _ready():
-	bot_sprite.play("patrol")
-	add_to_group("Enemy")
-	timer.wait_time = shoot_cooldown
-	timer.one_shot = true
- # Recursively search for node named "Player"
-	player = get_tree().current_scene.find_child("Player", true, false)
+	# Find player once at start
+	player = get_tree().get_root().find_child("Player", true, false)
 
-	if player == null:
-		print("Player not found in scene!")	# res://scenes/player/player.tscn
-	# if not player:
-		# print("Player not found in scene!")
-	
 func _physics_process(delta):
-	var botPlayerRay = bot_player_ray.get_collider()
+	if player:
+		# Gravity
+		velocity.y += GRAVITY * delta
 
-		
-	if(health<=0):
-		bot_sprite.play("death")
-		await get_tree().create_timer(.5).timeout
-		emit_signal("enemy_defeated")
-		Global.score += points_per_kill
-		queue_free()
-	if botPlayerRay && timer.is_stopped():
-		if(botPlayerRay!=null):
-			if botPlayerRay.is_in_group("Player"):
-				shoot()
-			elif botPlayerRay.is_in_group("Enemy"):
-				set_collision_mask_value(1,false)
-	if not is_on_floor():
-		velocity.y += get_gravity().y *delta
-	if !bot_floor_ray.is_colliding() && is_on_floor():
-		flip()
-		
-	if player == null or !is_instance_valid(player):
-		player = get_tree().current_scene.find_child("Player", true, false)
+		# Vector to player
+		var to_player = player.global_position - global_position
+		var player_dir = sign(to_player.x)
 
-	if player != null and is_instance_valid(player):
+		# Flip sprite only if player clearly crossed sides
+		if player_dir != facing_dir and abs(to_player.x) > FLIP_THRESHOLD:
+			facing_dir = player_dir
+			sprite.flip_h = (facing_dir == -1)
+
 		# Move towards player
-		var direction_to_player = (player.global_position - global_position).normalized()
-		velocity.x = direction_to_player.x * move_speed
+		velocity.x = facing_dir * SPEED
 		move_and_slide()
 
-		# Aim turret at player
-		var to_player = player.global_position - bullet_start.global_position
-		turret_sprite.rotation = to_player.angle()
+		# Shoot logic
+		shoot_timer -= delta
+		if shoot_timer <= 0 and abs(to_player.x) > FLIP_THRESHOLD:
+			shoot_at_player(to_player)
+			shoot_timer = SHOOT_COOLDOWN
 
-		# Shoot if player is in front (0-180 degrees)
-		var facing_vector = Vector2.RIGHT.rotated(rotation)
-		var angle_to_player = facing_vector.angle_to(to_player.normalized())
+func shoot_at_player(to_player):
+	# Clamp aim to 180° cone in front of enemy
+	var facing_angle = 0.0 if facing_dir == 1 else PI
+	var raw_angle = to_player.angle()
+	var relative_angle = wrapf(raw_angle - facing_angle, -PI, PI)
+	var clamped_relative = clamp(relative_angle, -PI/2, PI/2)
+	var final_angle = facing_angle + clamped_relative
+	var final_direction = Vector2(cos(final_angle), sin(final_angle))
 
-		if abs(angle_to_player) < PI / 2 and can_shoot:  # Only shoot if player is roughly in front
-			shoot()
-
-	velocity.x = speed
-	move_and_slide()
-	
-
-
-
-func flip():
-	bot_floor_ray.position.x = abs(bot_floor_ray.position.x) if facing_right else abs(bot_floor_ray.position.x)*-1
-	bot_player_ray.scale.x = abs(bot_player_ray.scale.x) if facing_right else abs(bot_player_ray.scale.x)*-1
-	#bulletStartPos
-	if(bullet_start.position.x > 0):
-		bullet_start.rotation_degrees = 180
-		bullet_start.position.x = bullet_start.position.x*-1
-	elif(bullet_start.position.x < 0):
-		bullet_start.rotation_degrees = 0
-		bullet_start.position.x = absf(bullet_start.position.x)
-		
-	facing_right = !facing_right
-	bot_sprite.flip_h = facing_right
-	if facing_right:
-		speed = abs(speed)*-1
-	else:
-		speed = abs(speed)
-func shoot():
-	if not BULLET:
-		return
-
-	print("has shot")
 	var new_bullet = BULLET.instantiate()
-	new_bullet.spawnPos = bullet_start.global_position
+	new_bullet.global_position = bullet_start.global_position
+	new_bullet.set_direction(final_direction)
+	get_tree().current_scene.add_child(new_bullet)
 
-	# Calculate direction to player
-	var shoot_dir = (player.global_position - bullet_start.global_position).normalized()
-	new_bullet.set_direction(shoot_dir)  # Assuming bullet.gd has set_direction()
-
-	#var direction = Vector2.LEFT if bot_sprite.flip_h else Vector2.RIGHT
-	#new_bullet.set_direction(direction)
-	
-	# new_bullet.spawnPos = bullet_start.global_position 
-	new_bullet.speed = 500
-	get_tree().root.add_child(new_bullet)
-
-	can_shoot = false
-	timer.start()
-
-func _on_timer_timeout():
-	can_shoot = true
-
-
-func hit(_direction):
-		health -= 10
-		enemy_health_bar.change_health(-10)
-	
+	# Optional: Rotate bullet visually
+	new_bullet.rotation = final_direction.angle()

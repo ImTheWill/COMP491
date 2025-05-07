@@ -53,7 +53,7 @@ func shoot():
 	var direction = Vector2.LEFT if turrent_sprite.flip_h else Vector2.RIGHT
 	new_bullet.set_direction(direction)
 
-	new_bullet.spawnPos = bullet_start.global_position 
+	new_bullet.global_position = bullet_start.global_position
 	new_bullet.speed = 500
 	get_tree().root.add_child(new_bullet)
 	timer.start()
